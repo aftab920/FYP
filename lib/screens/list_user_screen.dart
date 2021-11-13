@@ -31,7 +31,7 @@ class _ListUserScreenState extends State<ListUserScreen> {
     try {
       // response = await Dio()
       //     .get('http://192.168.170.35/WebAPIDemo/api/users/allusers');
-      String uri = 'http://192.168.10.20/WebAPIDemo/api/users/allusers';
+      String uri = 'http://192.168.0.113/ApiDemo/api/admins/alladmins';
       var response = (await http1.get(Uri.parse(uri)));
 
       if (response.statusCode == 200) {
@@ -42,7 +42,7 @@ class _ListUserScreenState extends State<ListUserScreen> {
           // jsonDecode(job);
           Iterable it = jsonDecode(response.body);
           users = it.map((e) => User.fromMap(e)).toList();
-          int x = -90;
+          //int x = -90;
           // listUserResponse = ListUserResponse.fromJson(response.data);
           // users = listUserResponse.user;
         });
@@ -63,10 +63,16 @@ class _ListUserScreenState extends State<ListUserScreen> {
           child: ListView.builder(
         itemBuilder: (context, index) {
           final user = users[index];
-          return ListTile(
-            title: Text(user.name),
-            leading: Image.network('https://via.placeholder.com/150'),
-            subtitle: Text(user.email),
+          return Card(
+            child: ListTile(
+              title: Text(user.password),
+              leading: Image.network('https://via.placeholder.com/150'),
+              subtitle: Text(user.email),
+              trailing: ElevatedButton(
+                child: Text('Get'),
+                onPressed: () {},
+              ),
+            ),
           );
         },
         itemCount: users.length,

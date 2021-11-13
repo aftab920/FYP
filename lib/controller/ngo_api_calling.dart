@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:fyp_real/screens/auth_screen.dart';
+import 'package:fyp_real/screens/ngo_overview.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http1;
 //import '../controller/admin_api_calling.dart' as globals;
@@ -86,7 +87,7 @@ class NgoApiCalling {
       print(response.body);
       if (response.statusCode == 200) {
         print('inserted');
-        Get.to(() => AuthScreen());
+        Get.to(() => NGOOverview());
       } else
         print('insertion failed');
     } on Exception catch (e) {

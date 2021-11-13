@@ -8,8 +8,8 @@ class User {
   @JsonKey(name: "Id")
   late int id;
 
-  @JsonKey(name: "Name")
-  late String name;
+  // @JsonKey(name: "Name")
+  // late String name;
 
   @JsonKey(name: "Email")
   late String email;
@@ -24,7 +24,7 @@ class User {
 
   User.fromMap(Map<String, dynamic> mp) {
     id = mp['Id'];
-    name = mp['Name'];
+    //name = mp['Name'];
     email = mp['Email'];
     password = mp['Password'];
   }

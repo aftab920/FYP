@@ -95,4 +95,35 @@ class AdminApiCalling {
       print(e);
     }
   }
+
+  Future medicineRequest(
+    String name,
+    String quantity,
+    String type,
+  ) async {
+    try {
+      String uri = '$baseUrl/admins/medicinerequest';
+      var response = await http1.post(
+        Uri.parse(uri),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: jsonEncode(<String, String>{
+          "name": name,
+          "quantity": quantity,
+          // "requested_by": globals.email,
+          "type": type,
+        }),
+      );
+
+      print(response.body);
+      if (response.statusCode == 200) {
+        print('inserted');
+        Get.to(() => NGOOverview());
+      } else
+        print('insertion failed');
+    } on Exception catch (e) {
+      print(e);
+    }
+  }
 }

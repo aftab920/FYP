@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fyp_real/controller/admin_api_calling.dart';
 import 'package:fyp_real/controller/date_time_picker.dart';
+import 'package:fyp_real/controller/dose_type.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:intl/intl.dart';
@@ -10,24 +12,25 @@ final _quantityController = TextEditingController();
 // ignore: must_be_immutable
 class AdminMedicineRequest extends StatelessWidget {
   DateTimePicker dateController = Get.put(DateTimePicker());
-  static final GlobalKey<FormState> _formKey2 = GlobalKey();
+  static final GlobalKey<FormState> _formKey = GlobalKey();
+  final doseTypeController = Get.put(DoseType());
 
   @override
 
   //DateTime _selectedDate = DateTime.now();
 
   void _submitData() {
-    if (_quantityController.text.isEmpty) {
+    if (!_formKey.currentState!.validate()) {
+      print('Incomplete');
       return;
-    }
-    final enteredTitle = _titleController.text;
-    final enteredQuantity = double.parse(_quantityController.text);
-
-    if (enteredTitle.isEmpty ||
-        enteredQuantity <= 0 ||
-        dateController.selectedDate == null) {
-      return;
-    }
+    } else
+      print('Complete');
+    AdminApiCalling().medicineRequest(
+      _titleController.text,
+      _quantityController.text,
+      doseTypeController.dropdownValue.value,
+    );
+    Get.snackbar('Successful', 'Requested successfully!');
   }
 
   @override
@@ -43,7 +46,7 @@ class AdminMedicineRequest extends StatelessWidget {
             bottom: MediaQuery.of(context).viewInsets.bottom + 10,
           ),
           child: Form(
-            key: _formKey2,
+            key: _formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[
@@ -81,20 +84,15 @@ class AdminMedicineRequest extends StatelessWidget {
                   height: 70,
                 ),
                 ElevatedButton(
-                    child: Text('Post Request'),
-                    // style: ElevatedButton.styleFrom(
-                    //   primary: Theme.of(context).textTheme.button!.color,
-                    //   //onPrimary: Theme.of(context).textTheme.bodyText1,
-                    // ),
+                  child: Text('Post Request'),
+                  // style: ElevatedButton.styleFrom(
+                  //   primary: Theme.of(context).textTheme.button!.color,
+                  //   //onPrimary: Theme.of(context).textTheme.bodyText1,
+                  // ),
 
-                    //onPressed: _submitData,
-                    onPressed: () {
-                      if (_formKey2.currentState!.validate()) {
-                        Get.snackbar(
-                            'Medicine Request', 'Data is in processing.');
-                      } else
-                        Get.snackbar('Medicine Request', 'Incomplete fields.');
-                    }),
+                  //onPressed: _submitData,
+                  onPressed: _submitData,
+                ),
               ],
             ),
           ),

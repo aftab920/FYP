@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
       //home: AdminOverview(),
       initialRoute: '/',
       routes: {
-        '/': (ctx) => AdminOverview(),
+        '/': (ctx) => Test(),
         AdminOverview.routeName: (context) => AdminOverview(),
       },
       onGenerateRoute: (settings) {

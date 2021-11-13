@@ -107,8 +107,8 @@ class AdminOverview extends StatelessWidget {
               children: homeFeature.map((overviewFunctions) {
                 return InkWell(
                   onTap: () {
-                    if (overviewFunctions.id == 'a1') {
-                      //Get.to(page);
+                    if (overviewFunctions.id == 'a4') {
+                      // Get.to(page);
                     }
                   },
                   child: MainFunctionsItem(
