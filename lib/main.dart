@@ -1,12 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fyp_real/screens/member_overview.dart';
-import 'package:fyp_real/screens/ngo_overview.dart';
-import 'package:fyp_real/screens/test.dart';
+import './screens_admin/medicine_requests.dart';
 
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
-import 'package:fyp_real/screens/admin_overview.dart';
+import 'package:fyp_real/screens_admin/admin_overview.dart';
 import 'package:fyp_real/screens/auth_screen.dart';
 
 const String homeBoxName = 'home';
@@ -39,7 +37,7 @@ class MyApp extends StatelessWidget {
       //home: AdminOverview(),
       initialRoute: '/',
       routes: {
-        '/': (ctx) => Test(),
+        '/': (ctx) => AdminOverview(),
         AdminOverview.routeName: (context) => AdminOverview(),
       },
       onGenerateRoute: (settings) {

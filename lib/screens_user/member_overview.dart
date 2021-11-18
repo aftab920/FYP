@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 
 import 'package:fyp_real/screens/main_functions_item.dart';
-import 'package:fyp_real/widgets/member_home_feature.dart';
-import 'package:fyp_real/widgets/member_medicine_request.dart';
+import 'package:fyp_real/widgets_user/member_home_feature.dart';
+import 'package:fyp_real/widgets_user/member_medicine_request.dart';
 
 class MemberOverview extends StatelessWidget {
   static const routeName = '/admin-overview';

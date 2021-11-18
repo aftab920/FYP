@@ -1,16 +1,21 @@
 import 'dart:convert';
 
-import 'package:fyp_real/screens/admin_overview.dart';
+import 'package:fyp_real/controller/medicine_requests_controller.dart';
+import 'package:fyp_real/model/medicine_requests_model.dart';
+import 'package:fyp_real/screens_admin/admin_overview.dart';
 import 'package:fyp_real/screens/auth_screen.dart';
-import 'package:fyp_real/screens/member_overview.dart';
-import 'package:fyp_real/screens/ngo_overview.dart';
+import 'package:fyp_real/screens_user/member_overview.dart';
+import 'package:fyp_real/screens_ngo/ngo_overview.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http1;
 import '../controller/variables.dart' as globals;
 
 class AdminApiCalling {
   static late String email;
-  String baseUrl = 'http://192.168.0.113/ApiDemo/api/';
+  //final allRequestsController = Get.put(MedicineRequestsController());
+
+  //String baseUrl = 'http://192.168.0.113/ApiDemo/api/';
+  String baseUrl = 'http://192.168.100.202/ApiDemo/api/';
 
   Future RegisterAdmin(email, password) async {
     try {
@@ -102,7 +107,7 @@ class AdminApiCalling {
     String type,
   ) async {
     try {
-      String uri = '$baseUrl/admins/medicinerequest';
+      String uri = '$baseUrl/admins/addmedicinerequest';
       var response = await http1.post(
         Uri.parse(uri),
         headers: <String, String>{
@@ -122,6 +127,33 @@ class AdminApiCalling {
         Get.to(() => NGOOverview());
       } else
         print('insertion failed');
+    } on Exception catch (e) {
+      print(e);
+    }
+  }
+
+  Future getMedicineRequests() async {
+    // Response response;
+    try {
+      // response = await Dio()
+      //     .get('http://192.168.170.35/WebAPIDemo/api/users/allusers');
+      String uri = '$baseUrl/admins/allRequestedMedicines';
+      var response = (await http1.get(Uri.parse(uri)));
+
+      if (response.statusCode == 200) {
+        // var job = '{"Name":"Ali","Email":"abc","Password":"Pass","Id":1}';
+        // jsonDecode(job);
+        // Iterable it = jsonDecode(response.body);
+        // allRequests = it.map((e) => MedicineRequestsModel.fromMap(e)).toList();
+        //int x = -90;
+        // listUserResponse = ListUserResponse.fromJson(response.data);
+        // users = listUserResponse.user;
+
+        Get.find<MedicineRequestsController>().allMedicneRequests(response);
+        //return allRequestsController.allRequests;
+      } else {
+        print('There is some problem status code not 200');
+      }
     } on Exception catch (e) {
       print(e);
     }

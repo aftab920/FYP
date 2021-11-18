@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:fyp_real/screens/main_functions_item.dart';
-import 'package:fyp_real/widgets/admin_medicine_request.dart';
+import 'package:fyp_real/widgets_admin/admin_medicine_request.dart';
 import 'package:get/get.dart';
 
-import '../widgets/admin_home_feature.dart';
+import '../widgets_admin/admin_home_feature.dart';
 
 class AdminOverview extends StatelessWidget {
   static const routeName = '/admin-overview';

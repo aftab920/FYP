@@ -60,23 +60,24 @@ class _ListUserScreenState extends State<ListUserScreen> {
         title: Text('Single User get'),
       ),
       body: Center(
-          child: ListView.builder(
-        itemBuilder: (context, index) {
-          final user = users[index];
-          return Card(
-            child: ListTile(
-              title: Text(user.password),
-              leading: Image.network('https://via.placeholder.com/150'),
-              subtitle: Text(user.email),
-              trailing: ElevatedButton(
-                child: Text('Get'),
-                onPressed: () {},
+        child: ListView.builder(
+          itemBuilder: (context, index) {
+            final user = users[index];
+            return Card(
+              child: ListTile(
+                title: Text(user.password),
+                leading: Image.network('https://via.placeholder.com/150'),
+                subtitle: Text(user.email),
+                trailing: ElevatedButton(
+                  child: Text('Get'),
+                  onPressed: () {},
+                ),
               ),
-            ),
-          );
-        },
-        itemCount: users.length,
-      )),
+            );
+          },
+          itemCount: users.length,
+        ),
+      ),
     );
   }
 }

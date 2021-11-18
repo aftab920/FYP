@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:fyp_real/screens/admin_overview.dart';
+import 'package:fyp_real/screens_admin/admin_overview.dart';
 import 'package:fyp_real/screens/auth_screen.dart';
-import 'package:fyp_real/screens/member_overview.dart';
+import 'package:fyp_real/screens_user/member_overview.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http1;
 

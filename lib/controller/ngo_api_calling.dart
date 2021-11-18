@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:fyp_real/screens/auth_screen.dart';
-import 'package:fyp_real/screens/ngo_overview.dart';
+import 'package:fyp_real/screens_ngo/ngo_overview.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http1;
 //import '../controller/admin_api_calling.dart' as globals;
@@ -70,7 +70,7 @@ class NgoApiCalling {
     String type,
   ) async {
     try {
-      String uri = '$baseUrl/medicinerequest';
+      String uri = '$baseUrl/addmedicinerequest';
       var response = await http1.post(
         Uri.parse(uri),
         headers: <String, String>{

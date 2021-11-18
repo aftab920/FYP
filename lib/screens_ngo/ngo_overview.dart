@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 
 import 'package:fyp_real/screens/main_functions_item.dart';
-import 'package:fyp_real/widgets/ngo_medicine_request.dart';
-import 'package:fyp_real/widgets/ngo_home_feature.dart';
+import 'package:fyp_real/widgets_ngo/ngo_medicine_request.dart';
+import 'package:fyp_real/widgets_ngo/ngo_home_feature.dart';
 import '../controller/admin_api_calling.dart';
 
 class NGOOverview extends StatelessWidget {
