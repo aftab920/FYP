@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fyp_real/http_service.dart';
 import '../controller/member_api_calling.dart';
 import '../controller/ngo_api_calling.dart';
-import '../controller/admin_api_calling.dart';
+import '../controller/admin_controller/admin_api_calling.dart';
 
 enum AuthMode { signin, signup }
 enum AuthType {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:fyp_real/controller/admin_api_calling.dart';
-import 'package:fyp_real/controller/medicine_requests_controller.dart';
+import 'package:fyp_real/controller/admin_controller/admin_api_calling.dart';
+import 'package:fyp_real/controller/admin_controller/medicine_requests_controller.dart';
 import 'package:get/get.dart';
 
 class MedicineRequests extends StatefulWidget {
@@ -19,8 +19,6 @@ class _MedicineRequestsState extends State<MedicineRequests> {
     //allRequests =
     allReqCtrl = Get.put(MedicineRequestsController());
     AdminApiCalling().getMedicineRequests();
-
-    // Get.put(MedicineRequestsController);
     super.initState();
   }
 
@@ -28,7 +26,7 @@ class _MedicineRequestsState extends State<MedicineRequests> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Medicine Requests 2'),
+        title: Text('All Medicine Requests'),
       ),
       body: Obx(
         () => ListView.builder(

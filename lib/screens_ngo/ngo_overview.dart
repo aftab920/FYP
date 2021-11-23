@@ -4,7 +4,7 @@ import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:fyp_real/screens/main_functions_item.dart';
 import 'package:fyp_real/widgets_ngo/ngo_medicine_request.dart';
 import 'package:fyp_real/widgets_ngo/ngo_home_feature.dart';
-import '../controller/admin_api_calling.dart';
+import 'package:fyp_real/controller/admin_controller/admin_api_calling.dart';
 
 class NGOOverview extends StatelessWidget {
   static const routeName = '/admin-overview';

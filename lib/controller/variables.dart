@@ -1,3 +1,3 @@
-import 'package:fyp_real/controller/admin_api_calling.dart';
+import 'admin_controller/admin_api_calling.dart';
 
 var email;

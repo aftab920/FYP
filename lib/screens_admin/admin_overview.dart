@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:fyp_real/screens/main_functions_item.dart';
+import 'package:fyp_real/screens_admin/available_medicines.dart';
+import 'package:fyp_real/screens_admin/donated_medicines.dart';
+import 'package:fyp_real/screens_admin/medicine_requests.dart';
+import 'package:fyp_real/screens_admin/profile_edit.dart';
 import 'package:fyp_real/widgets_admin/admin_medicine_request.dart';
 import 'package:get/get.dart';
 
@@ -29,13 +33,22 @@ class AdminOverview extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            const DrawerHeader(
-                decoration: BoxDecoration(
-                  color: Colors.pink,
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.pink,
+              ),
+              child: CircleAvatar(
+                radius: 10.0,
+                //backgroundImage: ,
+                child: ClipRRect(
+                  child: Image.asset(
+                    'assets/images/Profile_Image.jpg',
+                    fit: BoxFit.cover,
+                  ),
+                  borderRadius: BorderRadius.circular(70.0),
                 ),
-                child: CircleAvatar(
-                  maxRadius: 5.0,
-                )),
+              ),
+            ),
             Card(
               child: ListTile(
                 title: Text(
@@ -43,7 +56,7 @@ class AdminOverview extends StatelessWidget {
                   style: Theme.of(context).textTheme.headline6,
                 ),
                 onTap: () {
-                  Navigator.pop(context);
+                  Get.to(() => ProfileEdit());
                 },
               ),
             ),
@@ -107,8 +120,17 @@ class AdminOverview extends StatelessWidget {
               children: homeFeature.map((overviewFunctions) {
                 return InkWell(
                   onTap: () {
+                    if (overviewFunctions.id == 'a1') {
+                      Get.to(() => MedicineRequests());
+                    }
+                    if (overviewFunctions.id == 'a2') {
+                      Get.to(() => DonatedMedicines());
+                    }
+                    if (overviewFunctions.id == 'a3') {
+                      _requestMedicine(context);
+                    }
                     if (overviewFunctions.id == 'a4') {
-                      // Get.to(page);
+                      Get.to(() => AvailableMedicines());
                     }
                   },
                   child: MainFunctionsItem(

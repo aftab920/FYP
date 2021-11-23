@@ -1,21 +1,23 @@
 import 'dart:convert';
 
-import 'package:fyp_real/controller/medicine_requests_controller.dart';
-import 'package:fyp_real/model/medicine_requests_model.dart';
+import 'package:fyp_real/controller/admin_controller/medicine_available_controller.dart';
+import 'package:fyp_real/controller/admin_controller/medicine_donated_controller.dart';
+import 'package:fyp_real/controller/admin_controller/medicine_requests_controller.dart';
 import 'package:fyp_real/screens_admin/admin_overview.dart';
 import 'package:fyp_real/screens/auth_screen.dart';
 import 'package:fyp_real/screens_user/member_overview.dart';
 import 'package:fyp_real/screens_ngo/ngo_overview.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http1;
-import '../controller/variables.dart' as globals;
+import '../variables.dart' as globals;
 
 class AdminApiCalling {
   static late String email;
   //final allRequestsController = Get.put(MedicineRequestsController());
 
-  //String baseUrl = 'http://192.168.0.113/ApiDemo/api/';
-  String baseUrl = 'http://192.168.100.202/ApiDemo/api/';
+  String baseUrl = 'http://192.168.0.111/ApiDemo/api/';
+  // String baseUrl = 'http://192.168.100.44/ApiDemo/api/';   // SZ 1st Floor
+  // String baseUrl = 'http://192.168.100.202/ApiDemo/api/';  // Home
 
   Future RegisterAdmin(email, password) async {
     try {
@@ -153,6 +155,47 @@ class AdminApiCalling {
         //return allRequestsController.allRequests;
       } else {
         print('There is some problem status code not 200');
+        print(response.body);
+      }
+    } on Exception catch (e) {
+      print(e);
+    }
+  }
+
+  Future getMedicineDonated() async {
+    // Response response;
+    try {
+      // response = await Dio()
+      //     .get('http://192.168.170.35/WebAPIDemo/api/users/allusers');
+      String uri = '$baseUrl/admins/allDonatedMedicines';
+      var response = (await http1.get(Uri.parse(uri)));
+
+      if (response.statusCode == 200) {
+        Get.find<MedicineDonatedController>().allMedicineDonated(response);
+        //return allRequestsController.allRequests;
+      } else {
+        print('There is some problem status code not 200');
+        print(response.body);
+      }
+    } on Exception catch (e) {
+      print(e);
+    }
+  }
+
+  Future getAvailableMedicine() async {
+    // Response response;
+    try {
+      // response = await Dio()
+      //     .get('http://192.168.170.35/WebAPIDemo/api/users/allusers');
+      String uri = '$baseUrl/admins/allAvailableMedicines';
+      var response = (await http1.get(Uri.parse(uri)));
+
+      if (response.statusCode == 200) {
+        Get.find<MedicineAvailableController>().allAvailableMedicine(response);
+        //return allRequestsController.allRequests;
+      } else {
+        print('There is some problem status code not 200');
+        print(response.body);
       }
     } on Exception catch (e) {
       print(e);
