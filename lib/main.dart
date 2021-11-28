@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fyp_real/screens_admin/all_users.dart';
+import 'package:fyp_real/screens_admin/profile_edit.dart';
+import 'package:fyp_real/screens_ngo/ngo_profile_edit.dart';
 import './screens_admin/medicine_requests.dart';
 
 import 'package:get/get_navigation/src/root/get_material_app.dart';

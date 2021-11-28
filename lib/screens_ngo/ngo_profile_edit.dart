@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
-class ProfileEdit extends StatelessWidget {
+class NGOProfileEdit extends StatelessWidget {
   TextEditingController _passwordController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _nameController = TextEditingController();
+
+  final GlobalKey<FormState> _formKey = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,22 +48,41 @@ class ProfileEdit extends StatelessWidget {
               style: Theme.of(context).textTheme.button!.copyWith(fontSize: 25),
             ),
             Container(
-                padding: EdgeInsets.only(
-                  top: 20,
-                  left: 20,
-                  right: 20,
-                  // bottom: MediaQuery.of(context).viewInsets.bottom + 5,
-                ),
+              padding: EdgeInsets.only(
+                top: 20,
+                left: 20,
+                right: 20,
+                // bottom: MediaQuery.of(context).viewInsets.bottom + 5,
+              ),
+              child: Form(
+                key: _formKey,
                 child: Column(
                   children: [
                     TextFormField(
+                      controller: _nameController,
+                      decoration: InputDecoration(
+                        label: Text('Update Name'),
+                      ),
+                      //initialValue: AdminApiCalling.email,
+                    ),
+                    TextFormField(
+                      controller: _emailController,
+                      decoration: InputDecoration(
+                        label: Text('Update Email'),
+                      ),
+                      //initialValue: AdminApiCalling.email,
+                    ),
+                    TextFormField(
                       controller: _passwordController,
-                      decoration:
-                          InputDecoration(label: Text('Update Password')),
+                      decoration: InputDecoration(
+                        label: Text('Update Password'),
+                      ),
                       //initialValue: AdminApiCalling.email,
                     ),
                   ],
-                )),
+                ),
+              ),
+            ),
           ],
         ),
       ),

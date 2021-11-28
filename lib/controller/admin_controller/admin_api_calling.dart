@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:fyp_real/controller/admin_controller/all_users_controller.dart';
 import 'package:fyp_real/controller/admin_controller/medicine_available_controller.dart';
 import 'package:fyp_real/controller/admin_controller/medicine_donated_controller.dart';
 import 'package:fyp_real/controller/admin_controller/medicine_requests_controller.dart';
@@ -61,6 +62,7 @@ class AdminApiCalling {
       if (response.statusCode == 200) {
         globals.email = email;
         print('Signed In Admin');
+        print(globals.email);
         Get.to(() => AdminOverview());
       }
 
@@ -96,8 +98,7 @@ class AdminApiCalling {
         globals.email = email;
         print('Signed In NGO');
         Get.to(() => NGOOverview());
-      } else
-        print('Authentication failed');
+      }
     } on Exception catch (e) {
       print(e);
     }
@@ -192,6 +193,23 @@ class AdminApiCalling {
 
       if (response.statusCode == 200) {
         Get.find<MedicineAvailableController>().allAvailableMedicine(response);
+        //return allRequestsController.allRequests;
+      } else {
+        print('There is some problem status code not 200');
+        print(response.body);
+      }
+    } on Exception catch (e) {
+      print(e);
+    }
+  }
+
+  Future getAllUsers() async {
+    try {
+      String uri = '$baseUrl/admins/allUsers';
+      var response = (await http1.get(Uri.parse(uri)));
+
+      if (response.statusCode == 200) {
+        Get.find<AllUsersController>().allRegisteredUsers(response);
         //return allRequestsController.allRequests;
       } else {
         print('There is some problem status code not 200');

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:fyp_real/screens/main_functions_item.dart';
+import 'package:fyp_real/screens_admin/all_users.dart';
 import 'package:fyp_real/screens_admin/available_medicines.dart';
 import 'package:fyp_real/screens_admin/donated_medicines.dart';
 import 'package:fyp_real/screens_admin/medicine_requests.dart';
@@ -113,7 +114,7 @@ class AdminOverview extends StatelessWidget {
             ),
           ),
           Flexible(
-            flex: 1,
+            flex: 2,
             child: GridView(
               shrinkWrap: true,
               // physics: NeverScrollableScrollPhysics(),
@@ -121,16 +122,22 @@ class AdminOverview extends StatelessWidget {
                 return InkWell(
                   onTap: () {
                     if (overviewFunctions.id == 'a1') {
-                      Get.to(() => MedicineRequests());
+                      Get.to(() => AllUsers());
                     }
                     if (overviewFunctions.id == 'a2') {
-                      Get.to(() => DonatedMedicines());
+                      Get.to(() => MedicineRequests());
                     }
                     if (overviewFunctions.id == 'a3') {
-                      _requestMedicine(context);
+                      Get.to(() => AvailableMedicines());
                     }
                     if (overviewFunctions.id == 'a4') {
-                      Get.to(() => AvailableMedicines());
+                      //      Get.to(() => Wishlist());
+                    }
+                    if (overviewFunctions.id == 'a5') {
+                      Get.to(() => DonatedMedicines());
+                    }
+                    if (overviewFunctions.id == 'a4') {
+                      //      Get.to(() => Wishlist());
                     }
                   },
                   child: MainFunctionsItem(

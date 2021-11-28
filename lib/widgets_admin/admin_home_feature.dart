@@ -6,27 +6,32 @@ import '../model/home.dart';
 final homeFeature = [
   Home(
     'a1',
-    'Medicine Requests',
+    'All Users              ',
     Icon(Icons.notifications_active),
   ),
   Home(
     'a2',
-    'All Medicines Donated',
-    Icon(Icons.grading_outlined),
+    'Medicine Requests         ',
+    Icon(Icons.notifications_active),
   ),
   Home(
     'a3',
-    'Post Request For Medicine',
-    Icon(Icons.post_add),
+    'Available Stock          ',
+    Icon(Icons.grading_outlined),
   ),
   Home(
     'a4',
-    'Medicines Available',
-    Icon(Icons.inventory_outlined),
+    'Wishlist Products         ',
+    Icon(Icons.post_add),
   ),
   Home(
     'a5',
-    'Blocked Users',
+    'Donated Medicine            ',
+    Icon(Icons.inventory_outlined),
+  ),
+  Home(
+    'a6',
+    'Blocked Users              ',
     Icon(Icons.block_flipped),
   ),
 ];
