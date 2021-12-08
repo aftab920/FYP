@@ -1,22 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fyp_real/model/home.dart';
 
-import '../model/home.dart';
-
-final memberHomeFeature = [
+final pharmacyHomeFeature = [
   Home(
     'a1',
-    'All Medicines Donated',
+    'Medicines Financial Donation',
     Icon(Icons.grading_outlined),
   ),
   Home(
     'a2',
-    'Donate Medicine',
+    'Self Medicines Donation',
     Icon(Icons.inventory_outlined),
   ),
   Home(
     'a3',
-    'Financial Donation For Medicine',
-    Icon(Icons.post_add),
+    'All Medicines Donate',
+    Icon(Icons.inventory_outlined),
   ),
 ];

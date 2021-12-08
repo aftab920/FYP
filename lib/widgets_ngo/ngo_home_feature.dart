@@ -11,7 +11,7 @@ final ngoHomeFeature = [
   ),
   Home(
     'a2',
-    'Medicines Available',
+    'Hospitals               ',
     Icon(Icons.inventory_outlined),
   ),
 ];

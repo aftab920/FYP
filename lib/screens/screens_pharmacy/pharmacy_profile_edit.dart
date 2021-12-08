@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-class UserProfileEdit extends StatelessWidget {
+class PharmacyProfileEdit extends StatelessWidget {
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _nameController = TextEditingController();
+  TextEditingController _phoneController = TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey();
 
@@ -44,7 +45,7 @@ class UserProfileEdit extends StatelessWidget {
               height: 13,
             ),
             Text(
-              'Admin',
+              'Ahmad',
               style: Theme.of(context).textTheme.button!.copyWith(fontSize: 25),
             ),
             Container(
@@ -76,6 +77,13 @@ class UserProfileEdit extends StatelessWidget {
                       controller: _passwordController,
                       decoration: InputDecoration(
                         label: Text('Update Password'),
+                      ),
+                      //initialValue: AdminApiCalling.email,
+                    ),
+                    TextFormField(
+                      controller: _phoneController,
+                      decoration: InputDecoration(
+                        label: Text('Update Address'),
                       ),
                       //initialValue: AdminApiCalling.email,
                     ),

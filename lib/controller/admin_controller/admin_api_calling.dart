@@ -4,9 +4,10 @@ import 'package:fyp_real/controller/admin_controller/all_users_controller.dart';
 import 'package:fyp_real/controller/admin_controller/medicine_available_controller.dart';
 import 'package:fyp_real/controller/admin_controller/medicine_donated_controller.dart';
 import 'package:fyp_real/controller/admin_controller/medicine_requests_controller.dart';
+import 'package:fyp_real/screens/screens_pharmacy/pharmacy_overview.dart';
 import 'package:fyp_real/screens_admin/admin_overview.dart';
 import 'package:fyp_real/screens/auth_screen.dart';
-import 'package:fyp_real/screens_user/member_overview.dart';
+import 'package:fyp_real/screens_donar/member_overview.dart';
 import 'package:fyp_real/screens_ngo/ngo_overview.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http1;
@@ -48,7 +49,8 @@ class AdminApiCalling {
 
   Future LoginAdmin(email, password) async {
     try {
-      String uri = '$baseUrl/admins/loginadmin?email=$email&password=$password';
+      String uri =
+          '$baseUrl/userdata/LoginUser?email=$email&password=$password';
       /////////// C A S E 1 ----------
 
       var response = await http1.get(
@@ -61,44 +63,45 @@ class AdminApiCalling {
       print(response.body);
       if (response.statusCode == 200) {
         globals.email = email;
-        print('Signed In Admin');
-        print(globals.email);
-        Get.to(() => AdminOverview());
+        if (response.body == 'Donar') Get.to(() => MemberOverview());
+        if (response.body == 'Admin') Get.to(() => AdminOverview());
+        if (response.body == 'Pharmacy') Get.to(() => PharmacyOverview());
+        if (response.body == 'NGO') Get.to(() => NGOOverview());
       }
 
-      /////////// C A S E 2 ----------
+      // /////////// C A S E 2 ----------
 
-      String uri2 = '$baseUrl/users/loginuser?email=$email&password=$password';
-      var response2 = await http1.get(
-        Uri.parse(uri2),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8'
-        },
-      );
-      print(response2.statusCode);
-      print(response2.body);
-      if (response2.statusCode == 200) {
-        globals.email = email;
-        print('Signed In User');
-        Get.to(() => MemberOverview());
-      }
+      // String uri2 = '$baseUrl/users/loginuser?email=$email&password=$password';
+      // var response2 = await http1.get(
+      //   Uri.parse(uri2),
+      //   headers: <String, String>{
+      //     'Content-Type': 'application/json; charset=UTF-8'
+      //   },
+      // );
+      // print(response2.statusCode);
+      // print(response2.body);
+      // if (response2.statusCode == 200) {
+      //   globals.email = email;
+      //   print('Signed In User');
+      //   Get.to(() => MemberOverview());
+      // }
 
-      /////////// C A S E 3 ----------
+      // /////////// C A S E 3 ----------
 
-      String uri3 = '$baseUrl/ngo/loginngo?email=$email&password=$password';
-      var response3 = await http1.get(
-        Uri.parse(uri3),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8'
-        },
-      );
-      print(response3.statusCode);
-      print(response3.body);
-      if (response3.statusCode == 200) {
-        globals.email = email;
-        print('Signed In NGO');
-        Get.to(() => NGOOverview());
-      }
+      // String uri3 = '$baseUrl/ngo/loginngo?email=$email&password=$password';
+      // var response3 = await http1.get(
+      //   Uri.parse(uri3),
+      //   headers: <String, String>{
+      //     'Content-Type': 'application/json; charset=UTF-8'
+      //   },
+      // );
+      // print(response3.statusCode);
+      // print(response3.body);
+      // if (response3.statusCode == 200) {
+      //   globals.email = email;
+      //   print('Signed In NGO');
+      //   Get.to(() => NGOOverview());
+      // }
     } on Exception catch (e) {
       print(e);
     }

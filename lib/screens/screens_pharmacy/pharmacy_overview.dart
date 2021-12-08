@@ -1,28 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:fyp_real/screens/main_functions_item.dart';
+import 'package:fyp_real/screens/screens_pharmacy/medicine_donated_pharmacy.dart';
+import 'package:fyp_real/screens/screens_pharmacy/pharmacy_profile_edit.dart';
 import 'package:fyp_real/screens_admin/all_users.dart';
-import 'package:fyp_real/screens_admin/available_medicines.dart';
-import 'package:fyp_real/screens_admin/blocked_users.dart';
-import 'package:fyp_real/screens_admin/donated_medicines.dart';
 import 'package:fyp_real/screens_admin/medicine_requests.dart';
 import 'package:fyp_real/screens_admin/profile_edit.dart';
-import 'package:fyp_real/screens_admin/wishlist.dart';
-import 'package:fyp_real/widgets_admin/admin_medicine_request.dart';
+import 'package:fyp_real/widgets/widgets_pharmacy/medicine_financial_donation.dart';
+import 'package:fyp_real/widgets/widgets_pharmacy/pharmacy_home_feature.dart';
+import 'package:fyp_real/widgets/widgets_pharmacy/pharmacy_medicine_request.dart';
+
 import 'package:get/get.dart';
 
-import '../widgets_admin/admin_home_feature.dart';
-
-class AdminOverview extends StatelessWidget {
-  static const routeName = '/admin-overview';
-
+class PharmacyOverview extends StatelessWidget {
   void _requestMedicine(BuildContext ctx) {
     showModalBottomSheet(
       context: ctx,
       builder: (_) {
         return GestureDetector(
           onTap: () {},
-          child: AdminMedicineRequest(),
+          child: PharmacyMedicineRequest(),
+          behavior: HitTestBehavior.opaque,
+        );
+      },
+    );
+  }
+
+  void _medicineFinancialDonation(BuildContext ctx) {
+    showModalBottomSheet(
+      context: ctx,
+      builder: (_) {
+        return GestureDetector(
+          onTap: () {},
+          child: MedicineFinancialDonation(),
           behavior: HitTestBehavior.opaque,
         );
       },
@@ -59,7 +69,7 @@ class AdminOverview extends StatelessWidget {
                   style: Theme.of(context).textTheme.headline6,
                 ),
                 onTap: () {
-                  Get.to(() => ProfileEdit());
+                  Get.to(() => PharmacyProfileEdit());
                 },
               ),
             ),
@@ -84,7 +94,7 @@ class AdminOverview extends StatelessWidget {
         ),
       ),
       appBar: AppBar(
-        title: const Text('Admin Mode'),
+        title: const Text('Pharmacy Mode'),
         centerTitle: true,
       ),
       body: SafeArea(
@@ -120,26 +130,17 @@ class AdminOverview extends StatelessWidget {
             child: GridView(
               shrinkWrap: true,
               // physics: NeverScrollableScrollPhysics(),
-              children: homeFeature.map((overviewFunctions) {
+              children: pharmacyHomeFeature.map((overviewFunctions) {
                 return InkWell(
                   onTap: () {
                     if (overviewFunctions.id == 'a1') {
-                      Get.to(() => AllUsers());
+                      _medicineFinancialDonation(context);
                     }
                     if (overviewFunctions.id == 'a2') {
-                      Get.to(() => MedicineRequests());
+                      _requestMedicine(context);
                     }
                     if (overviewFunctions.id == 'a3') {
-                      Get.to(() => AvailableMedicines());
-                    }
-                    if (overviewFunctions.id == 'a4') {
-                      Get.to(() => Wishlist());
-                    }
-                    if (overviewFunctions.id == 'a5') {
-                      Get.to(() => DonatedMedicines());
-                    }
-                    if (overviewFunctions.id == 'a4') {
-                      Get.to(() => BlockedUsers());
+                      Get.to(() => MedicineDonatedPharmacy());
                     }
                   },
                   child: MainFunctionsItem(

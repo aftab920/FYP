@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 
 import 'package:fyp_real/screens/main_functions_item.dart';
+import 'package:fyp_real/screens_donar/medicine_donated_donar.dart';
+import 'package:fyp_real/screens_donar/member_profile_edit.dart';
 import 'package:fyp_real/widgets_user/member_home_feature.dart';
 import 'package:fyp_real/widgets_user/member_medicine_request.dart';
+import 'package:get/get.dart';
 
 class MemberOverview extends StatelessWidget {
-  static const routeName = '/admin-overview';
-
   void _requestMedicine(BuildContext ctx) {
     showModalBottomSheet(
       context: ctx,
@@ -28,13 +29,22 @@ class MemberOverview extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            const DrawerHeader(
-                decoration: BoxDecoration(
-                  color: Colors.pink,
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.pink,
+              ),
+              child: CircleAvatar(
+                radius: 10.0,
+                //backgroundImage: ,
+                child: ClipRRect(
+                  child: Image.asset(
+                    'assets/images/Profile_Image.jpg',
+                    fit: BoxFit.cover,
+                  ),
+                  borderRadius: BorderRadius.circular(70.0),
                 ),
-                child: CircleAvatar(
-                  maxRadius: 5.0,
-                )),
+              ),
+            ),
             Card(
               child: ListTile(
                 title: Text(
@@ -42,7 +52,7 @@ class MemberOverview extends StatelessWidget {
                   style: Theme.of(context).textTheme.headline6,
                 ),
                 onTap: () {
-                  Navigator.pop(context);
+                  Get.to(() => MemberProfileEdit());
                 },
               ),
             ),
@@ -67,7 +77,7 @@ class MemberOverview extends StatelessWidget {
         ),
       ),
       appBar: AppBar(
-        title: const Text('Member Mode'),
+        title: const Text('Donar Mode'),
         centerTitle: true,
       ),
       body: SafeArea(
@@ -103,7 +113,13 @@ class MemberOverview extends StatelessWidget {
                   return InkWell(
                     onTap: () {
                       if (overviewFunctions.id == 'a1') {
-                        //Get.to(page);
+                        Get.to(() => MedicineDonateDonar());
+                      }
+                      if (overviewFunctions.id == 'a2') {
+                        _requestMedicine(context);
+                      }
+                      if (overviewFunctions.id == 'a3') {
+                        _requestMedicine(context);
                       }
                     },
                     child: MainFunctionsItem(

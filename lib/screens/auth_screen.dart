@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:fyp_real/controller/pharmacy_controller/pharmacy_api_controller.dart';
 
 import 'package:fyp_real/http_service.dart';
-import '../controller/member_api_calling.dart';
-import '../controller/ngo_api_calling.dart';
+import '../controller/donar_controller/member_api_calling.dart';
+import '../controller/ngo_controller/ngo_api_calling.dart';
 import '../controller/admin_controller/admin_api_calling.dart';
 
 enum AuthMode { signin, signup }
@@ -88,9 +89,9 @@ class _AuthCardState extends State<AuthCard> {
 
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  // final _addressController = TextEditingController();
+  final _addressController = TextEditingController();
   final _ngoRegController = TextEditingController();
-  // final _idController = TextEditingController();
+  final _phoneController = TextEditingController();
   final _nameController = TextEditingController();
 
   @override
@@ -104,11 +105,7 @@ class _AuthCardState extends State<AuthCard> {
     //'id': ""
   };
   String dropdownValue = 'Member';
-  final List _loginType = [
-    'NGO',
-    'Member',
-    //'Admin',
-  ];
+  final List _loginType = ['NGO', 'Donar', 'Pharmacy', 'HealthCare'];
 
   void submit() {
     if (!_formKey.currentState!.validate()) {
@@ -145,17 +142,32 @@ class _AuthCardState extends State<AuthCard> {
       // }
     }
     if (_authMode == AuthMode.signup) {
-      // if (dropdownValue == 'Admin')
-      //   AdminApiCalling()
-      //       .RegisterAdmin(_emailController.text, _passwordController.text);
+      if (dropdownValue == 'Pharmacy') {
+        PharmacyApiCalling().RegisterPharmacy(
+          _nameController,
+          _emailController.text,
+          _passwordController.text,
+          _addressController,
+        );
+      }
 
-      if (dropdownValue == 'Member')
-        MemberApiCalling().RegisterUser(_emailController.text,
-            _passwordController.text, _nameController.text);
+      if (dropdownValue == 'Donor') {
+        MemberApiCalling().RegisterUser(
+          _nameController,
+          _emailController.text,
+          _passwordController.text,
+          _phoneController.text,
+        );
+      }
 
       if (dropdownValue == 'NGO') {
-        NgoApiCalling().RegisterNGO(_nameController, _emailController.text,
-            _passwordController.text, _ngoRegController.text);
+        NgoApiCalling().RegisterNGO(
+          _nameController,
+          _emailController.text,
+          _passwordController.text,
+          _ngoRegController.text,
+          _addressController,
+        );
       }
     }
     setState(() {
@@ -195,40 +207,20 @@ class _AuthCardState extends State<AuthCard> {
             key: _formKey,
             child: Column(
               children: [
-                // DropdownButton(
-                //   hint: const Text('Select Login Type'),
-                //   icon: const Icon(Icons.keyboard_arrow_down),
-                //   value: dropdownValue,
-                //   items: _loginType.map((newVal) {
-                //     return DropdownMenuItem(
-                //       value: newVal,
-                //       child: Text(newVal),
-                //     );
-                //   }).toList(),
-                //   onChanged: (newVal) {
-                //     setState(() {
-                //       dropdownValue = newVal.toString();
-                //     });
-                //   },
-                // ),
-                // if (_authMode == AuthMode.signup && dropdownValue == 'Member' ||
-                //     _authMode == AuthMode.signup && dropdownValue == 'NGO')
-                //   TextFormField(
-                //     decoration: InputDecoration(
-                //       label: Text(' ${dropdownValue.toString()} Full Name'),
-                //     ),
-                //     controller: _nameController,
-                //     validator: (value) {
-                //       if (value != null && value.isEmpty ||
-                //           value != null && value.length < 4) {
-                //         return 'Invalid Name';
-                //       }
-                //       return null;
-                //     },
-                //     onSaved: (value) {
-                //       _authData['name'] = value!;
-                //     },
-                //   ),
+                TextFormField(
+                  decoration: const InputDecoration(label: Text('Name')),
+                  keyboardType: TextInputType.name,
+                  controller: _nameController,
+                  validator: (value) {
+                    if (value != null && value.isEmpty) {
+                      return 'Please Enter Name';
+                    }
+                    return null;
+                  },
+                  onSaved: (value) {
+                    _authData['name'] = value!;
+                  },
+                ),
                 TextFormField(
                   decoration: const InputDecoration(label: Text('Email')),
                   keyboardType: TextInputType.emailAddress,
@@ -292,49 +284,53 @@ class _AuthCardState extends State<AuthCard> {
                 //         : null,
                 //   ),
 
-                // if (_authMode == AuthMode.signup && dropdownValue == 'Member')
-                //   TextFormField(
-                //     decoration: const InputDecoration(
-                //         label: Text('Pakistani ID without without Dashes')),
-                //     controller: _idController,
-                //     validator: _authMode == AuthMode.signup
-                //         ? (value) {
-                //             if (value!.length != 13) {
-                //               return 'Enter valid contact Number';
-                //             }
-                //           }
-                //         : null,
-                //   ),
+                if (_authMode == AuthMode.signup && dropdownValue == 'NGO' ||
+                    _authMode == AuthMode.signup &&
+                        dropdownValue == 'Pharmacy' ||
+                    _authMode == AuthMode.signup &&
+                        dropdownValue == 'HealthCare')
+                  TextFormField(
+                    decoration:
+                        const InputDecoration(label: Text('Enter Address')),
+                    controller: _addressController,
+                    validator: _authMode == AuthMode.signup
+                        ? (value) {
+                            if (value != null && value.isEmpty) {
+                              return 'Please Enter Address';
+                            }
+                          }
+                        : null,
+                  ),
                 if (_authMode == AuthMode.signup && dropdownValue == 'NGO')
+                  TextFormField(
+                    decoration:
+                        const InputDecoration(label: Text('NGO Reg No.')),
+                    controller: _ngoRegController,
+                    validator: _authMode == AuthMode.signup
+                        ? (value) {
+                            if (value!.isEmpty) {
+                              return 'Please Enter Reg Number';
+                            }
+                          }
+                        : null,
+                  ),
+                if (_authMode == AuthMode.signup && dropdownValue == 'Donar' ||
+                    _authMode == AuthMode.signup &&
+                        dropdownValue == 'HealthCare')
                   Column(
                     children: [
                       TextFormField(
                         decoration:
-                            const InputDecoration(label: Text('NGO Reg No.')),
-                        controller: _ngoRegController,
+                            const InputDecoration(label: Text('Phone No.')),
+                        controller: _phoneController,
                         validator: _authMode == AuthMode.signup
                             ? (value) {
                                 if (value!.isEmpty) {
-                                  return 'Enter valid Number';
+                                  return 'Please Enter Phone No.';
                                 }
                               }
                             : null,
                       ),
-                      // TextFormField(
-                      //   decoration:
-                      //       const InputDecoration(label: Text('Adress')),
-                      //   controller: _addressController,
-                      //   validator: _authMode == AuthMode.signup
-                      //       ? (value) {
-                      //           if (value!.length < 5) {
-                      //             return 'Enter valid address';
-                      //           }
-                      //         }
-                      //       : null,
-                      // ),
-                      // if (_authMode == AuthMode.signup){
-
-                      // }
                     ],
                   ),
                 const SizedBox(

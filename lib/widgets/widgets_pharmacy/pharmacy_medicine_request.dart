@@ -8,7 +8,7 @@ final _titleController = TextEditingController();
 final _quantityController = TextEditingController();
 
 // ignore: must_be_immutable
-class MemberMedicineRequest extends StatelessWidget {
+class PharmacyMedicineRequest extends StatelessWidget {
   DateTimePicker dateController = Get.put(DateTimePicker());
 
   final doseTypeController = Get.put(DoseTypeDonar());

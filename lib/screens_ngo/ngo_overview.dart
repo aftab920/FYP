@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 
 import 'package:fyp_real/screens/main_functions_item.dart';
+import 'package:fyp_real/screens_ngo/hospitals.dart';
+import 'package:fyp_real/screens_ngo/ngo_profile_edit.dart';
 import 'package:fyp_real/widgets_ngo/ngo_medicine_request.dart';
 import 'package:fyp_real/widgets_ngo/ngo_home_feature.dart';
 import 'package:fyp_real/controller/admin_controller/admin_api_calling.dart';
+import 'package:get/get.dart';
 
 class NGOOverview extends StatelessWidget {
   static const routeName = '/admin-overview';
@@ -43,13 +46,22 @@ class NGOOverview extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            const DrawerHeader(
-                decoration: BoxDecoration(
-                  color: Colors.pink,
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.pink,
+              ),
+              child: CircleAvatar(
+                radius: 10.0,
+                //backgroundImage: ,
+                child: ClipRRect(
+                  child: Image.asset(
+                    'assets/images/Profile_Image.jpg',
+                    fit: BoxFit.cover,
+                  ),
+                  borderRadius: BorderRadius.circular(70.0),
                 ),
-                child: CircleAvatar(
-                  maxRadius: 5.0,
-                )),
+              ),
+            ),
             Card(
               child: ListTile(
                 title: Text(
@@ -57,7 +69,7 @@ class NGOOverview extends StatelessWidget {
                   style: Theme.of(context).textTheme.headline6,
                 ),
                 onTap: () {
-                  Navigator.pop(context);
+                  Get.to(() => NGOProfileEdit());
                 },
               ),
             ),
@@ -118,7 +130,10 @@ class NGOOverview extends StatelessWidget {
                   return InkWell(
                     onTap: () {
                       if (overviewFunctions.id == 'a1') {
-                        //Get.to(page);
+                        _requestMedicine(context);
+                      }
+                      if (overviewFunctions.id == 'a2') {
+                        Get.to(() => Hospitals());
                       }
                     },
                     child: MainFunctionsItem(

@@ -13,7 +13,7 @@ class NgoApiCalling {
   String baseUrl = 'http://192.168.0.113/ApiDemo/api/ngo';
   String baseUrlMedicine = 'http://192.168.0.113/ApiDemo/api/requested_med';
 
-  Future RegisterNGO(name, email, password, regNo) async {
+  Future RegisterNGO(name, email, password, regNo, address) async {
     try {
       //  this.email = email;
       String uri = '$baseUrl/RegisterNGO';
@@ -28,6 +28,7 @@ class NgoApiCalling {
           "email": email,
           "password": password,
           "ngoregno": regNo,
+          "address": address,
         }),
       );
 

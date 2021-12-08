@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../widgets/home_functions_detail.dart';
-
 class MainFunctionsItem extends StatelessWidget {
   final String id;
   final String title;
@@ -30,7 +28,7 @@ class MainFunctionsItem extends StatelessWidget {
             ),
             Expanded(
               child: icon,
-            )
+            ),
           ],
         ),
         decoration: BoxDecoration(
