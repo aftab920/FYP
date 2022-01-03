@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 
 import 'package:fyp_real/screens/main_functions_item.dart';
-import 'package:fyp_real/screens_ngo/hospitals.dart';
+import 'package:fyp_real/screens_admin/donated_medicines.dart';
+import 'package:fyp_real/screens_ngo/donate_medicine_ngo.dart';
+import 'package:fyp_real/screens_ngo/health_unit.dart';
 import 'package:fyp_real/screens_ngo/ngo_profile_edit.dart';
 import 'package:fyp_real/widgets_ngo/ngo_medicine_request.dart';
 import 'package:fyp_real/widgets_ngo/ngo_home_feature.dart';
-import 'package:fyp_real/controller/admin_controller/admin_api_calling.dart';
+
 import 'package:get/get.dart';
 
 class NGOOverview extends StatelessWidget {
-  static const routeName = '/admin-overview';
+  static const routeName = '/ngo-overview';
 
   // void _addNewTransaction(
   //     String txTitle, double txAmount, DateTime chosenDate) {
@@ -133,7 +135,10 @@ class NGOOverview extends StatelessWidget {
                         _requestMedicine(context);
                       }
                       if (overviewFunctions.id == 'a2') {
-                        Get.to(() => Hospitals());
+                        Get.to(() => DonateMedicineNgo());
+                      }
+                      if (overviewFunctions.id == 'a3') {
+                        Get.to(() => HealthUnit());
                       }
                     },
                     child: MainFunctionsItem(

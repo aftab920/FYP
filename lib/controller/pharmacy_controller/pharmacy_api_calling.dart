@@ -5,11 +5,11 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http1;
 
 class PharmacyApiCalling {
-  String baseUrl = 'http://192.168.0.113/ApiDemo/api/pharmacy';
+  String baseUrl = 'http://192.168.0.111/ApiDemo/api/userData';
 
-  Future RegisterPharmacy(name, email, password, address) async {
+  Future RegisterPharmacy(name, email, password, address, type) async {
     try {
-      String uri = '$baseUrl/RegisterPharmacy';
+      String uri = '$baseUrl/RegisterUser';
 
       var response = await http1.post(
         Uri.parse(uri),
@@ -21,6 +21,7 @@ class PharmacyApiCalling {
           "email": email,
           "password": password,
           "address": address,
+          "type": type,
         }),
       );
 

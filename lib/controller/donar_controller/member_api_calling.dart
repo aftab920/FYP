@@ -1,15 +1,14 @@
 import 'dart:convert';
 
-import 'package:fyp_real/screens_admin/admin_overview.dart';
 import 'package:fyp_real/screens/auth_screen.dart';
 import 'package:fyp_real/screens_donar/member_overview.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http1;
 
 class MemberApiCalling {
-  String baseUrl = 'http://192.168.0.113/ApiDemo/api/users';
+  String baseUrl = 'http://192.168.0.111/ApiDemo/api/userData';
 
-  Future RegisterUser(name, email, password, phone) async {
+  Future RegisterUser(name, email, password, phone, type) async {
     try {
       String uri = '$baseUrl/RegisterUser';
 
@@ -23,6 +22,7 @@ class MemberApiCalling {
           "email": email,
           "password": password,
           "phone": phone,
+          "type": type,
         }),
       );
 

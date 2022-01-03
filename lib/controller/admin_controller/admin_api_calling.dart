@@ -61,12 +61,25 @@ class AdminApiCalling {
       );
       print(response.statusCode);
       print(response.body);
+      var data = jsonDecode(response.body);
+      print('data: $data');
+      print(data[0]);
+      print(data[1]);
+
       if (response.statusCode == 200) {
-        globals.email = email;
-        if (response.body == 'Donar') Get.to(() => MemberOverview());
-        if (response.body == 'Admin') Get.to(() => AdminOverview());
-        if (response.body == 'Pharmacy') Get.to(() => PharmacyOverview());
-        if (response.body == 'NGO') Get.to(() => NGOOverview());
+        globals.id = data[0];
+
+        if (data[1] == 'donor' || data[1] == 'Donor')
+          Get.to(() => MemberOverview());
+        if (data[1] == 'Admin' || data[1] == 'admin')
+          Get.to(() => AdminOverview());
+        if (data[1] == 'Pharmacy' || data[1] == 'pharmacy')
+          Get.to(() => PharmacyOverview());
+        if (data[1] == 'NGO' || data[1] == 'ngo' || data[1] == 'Ngo')
+          Get.to(() => NGOOverview());
+        //if (response.body == 'HealthCare') Get.to(() => HCOverview());
+      } else {
+        print('User not found');
       }
 
       // /////////// C A S E 2 ----------

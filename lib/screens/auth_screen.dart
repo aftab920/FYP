@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:fyp_real/controller/pharmacy_controller/pharmacy_api_controller.dart';
+
+import 'package:fyp_real/controller/healthUnit_controller/healthUnit_api_calling.dart';
+import 'package:fyp_real/controller/pharmacy_controller/pharmacy_api_calling.dart';
 
 import 'package:fyp_real/http_service.dart';
 import '../controller/donar_controller/member_api_calling.dart';
@@ -104,7 +106,7 @@ class _AuthCardState extends State<AuthCard> {
     //'address': "",
     //'id': ""
   };
-  String dropdownValue = 'Member';
+  String dropdownValue = 'Donar';
   final List _loginType = ['NGO', 'Donar', 'Pharmacy', 'HealthCare'];
 
   void submit() {
@@ -121,52 +123,47 @@ class _AuthCardState extends State<AuthCard> {
 
       AdminApiCalling()
           .LoginAdmin(_emailController.text, _passwordController.text);
-
-      // if (dropdownValue == 'Admin') {
-      //   AdminApiCalling().LoginAdmin(
-      //     _emailController.text,
-      //     _passwordController.text,
-      //   );
-      // }
-      // if (dropdownValue == 'Member') {
-      //   MemberApiCalling().LoginUser(
-      //     _emailController.text,
-      //     _passwordController.text,
-      //   );
-      // }
-      // if (dropdownValue == 'NGO') {
-      //   NgoApiCalling().LoginNGO(
-      //     _emailController.text,
-      //     _passwordController.text,
-      //   );
-      // }
     }
     if (_authMode == AuthMode.signup) {
       if (dropdownValue == 'Pharmacy') {
         PharmacyApiCalling().RegisterPharmacy(
-          _nameController,
+          _nameController.text,
           _emailController.text,
           _passwordController.text,
-          _addressController,
+          _addressController.text,
+          dropdownValue,
         );
       }
 
-      if (dropdownValue == 'Donor') {
+      if (dropdownValue == 'Donar') {
         MemberApiCalling().RegisterUser(
-          _nameController,
+          _nameController.text,
           _emailController.text,
           _passwordController.text,
           _phoneController.text,
+          dropdownValue,
         );
       }
 
       if (dropdownValue == 'NGO') {
         NgoApiCalling().RegisterNGO(
-          _nameController,
+          _nameController.text,
           _emailController.text,
           _passwordController.text,
           _ngoRegController.text,
-          _addressController,
+          _addressController.text,
+          dropdownValue,
+        );
+      }
+
+      if (dropdownValue == 'HealthCare') {
+        HUApiCalling().RegisterHC(
+          _nameController.text,
+          _emailController.text,
+          _passwordController.text,
+          _phoneController.text,
+          _addressController.text,
+          dropdownValue,
         );
       }
     }
@@ -207,27 +204,29 @@ class _AuthCardState extends State<AuthCard> {
             key: _formKey,
             child: Column(
               children: [
-                TextFormField(
-                  decoration: const InputDecoration(label: Text('Name')),
-                  keyboardType: TextInputType.name,
-                  controller: _nameController,
-                  validator: (value) {
-                    if (value != null && value.isEmpty) {
-                      return 'Please Enter Name';
-                    }
-                    return null;
-                  },
-                  onSaved: (value) {
-                    _authData['name'] = value!;
-                  },
-                ),
+                if (_authMode == AuthMode.signup)
+                  TextFormField(
+                    decoration: const InputDecoration(label: Text('Name')),
+                    keyboardType: TextInputType.name,
+                    controller: _nameController,
+                    validator: (value) {
+                      if (value != null && value.isEmpty) {
+                        return 'Please Enter Name';
+                      }
+                      return null;
+                    },
+                    onSaved: (value) {
+                      _authData['name'] = value!;
+                    },
+                  ),
                 TextFormField(
                   decoration: const InputDecoration(label: Text('Email')),
                   keyboardType: TextInputType.emailAddress,
                   controller: _emailController,
                   validator: (value) {
-                    if (value != null && value.isEmpty ||
-                        value != null && !value.contains('@')) {
+                    if (value != null && value.isEmpty
+                        // || value != null && !value.contains('@')
+                        ) {
                       return 'Invalid Email';
                     }
                     return null;
@@ -241,8 +240,9 @@ class _AuthCardState extends State<AuthCard> {
                   obscureText: true,
                   controller: _passwordController,
                   validator: (value) {
-                    if (value != null && value.isEmpty ||
-                        value != null && value.length < 5) {
+                    if (value != null && value.isEmpty
+                        // ||    value != null && value.length < 5
+                        ) {
                       return 'Password is too short!';
                     }
                   },

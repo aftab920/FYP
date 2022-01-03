@@ -4,12 +4,12 @@ import 'package:fyp_real/screens/auth_screen.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http1;
 
-class HCApiCalling {
-  String baseUrl = 'http://192.168.0.113/ApiDemo/api/HC';
+class HUApiCalling {
+  String baseUrl = 'http://192.168.0.111/ApiDemo/api/userData';
 
-  Future RegisterHC(name, email, password, phone, address) async {
+  Future RegisterHC(name, email, password, phone, address, type) async {
     try {
-      String uri = '$baseUrl/RegisterHC';
+      String uri = '$baseUrl/RegisterUser';
 
       var response = await http1.post(
         Uri.parse(uri),
@@ -22,6 +22,7 @@ class HCApiCalling {
           "password": password,
           "phone": phone,
           "address": address,
+          "type": type,
         }),
       );
 

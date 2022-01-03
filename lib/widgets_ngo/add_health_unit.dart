@@ -9,7 +9,7 @@ final _titleController = TextEditingController();
 final _quantityController = TextEditingController();
 
 // ignore: must_be_immutable
-class NgoMedicineRequest extends StatelessWidget {
+class AddHealthUnit extends StatelessWidget {
   DateTimePicker dateController = Get.put(DateTimePicker());
   //DoseType doseTypeController = Get.put(DoseType());
   final doseTypeController = Get.put(DoseType());
@@ -69,11 +69,12 @@ class NgoMedicineRequest extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'Enter Medicine Name'),
+                  decoration:
+                      InputDecoration(labelText: 'Enter Health Unit Name'),
                   controller: _titleController,
                   validator: (val) {
                     if (val != null && val.isEmpty) {
-                      return 'Medicine name is required';
+                      return 'Name is required!';
                     }
                     return null;
                   },
@@ -83,8 +84,7 @@ class NgoMedicineRequest extends StatelessWidget {
                   // },
                 ),
                 TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter Required Quantity'),
+                  decoration: InputDecoration(labelText: 'Health Unit Type'),
                   controller: _quantityController,
                   keyboardType: TextInputType.number,
                   validator: (val) {

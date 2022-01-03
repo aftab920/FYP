@@ -6,12 +6,17 @@ import '../model/home.dart';
 final ngoHomeFeature = [
   Home(
     'a1',
-    'Post Request For Medicine',
+    'Request For Medicine',
     Icon(Icons.post_add),
   ),
   Home(
     'a2',
-    'Hospitals               ',
+    'Donate Medicine               ',
+    Icon(Icons.inventory_outlined),
+  ),
+  Home(
+    'a3',
+    'All Health Units               ',
     Icon(Icons.inventory_outlined),
   ),
 ];

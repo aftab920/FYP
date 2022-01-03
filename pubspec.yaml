@@ -47,6 +47,7 @@ dependencies:
   dio: ^4.0.0
   json_serializable: ^5.0.2
   http: ^0.13.4
+  number_inc_dec: ^0.8.0
  
 
 dev_dependencies:
