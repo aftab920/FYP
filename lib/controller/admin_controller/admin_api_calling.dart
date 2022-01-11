@@ -4,6 +4,7 @@ import 'package:fyp_real/controller/admin_controller/all_users_controller.dart';
 import 'package:fyp_real/controller/admin_controller/medicine_available_controller.dart';
 import 'package:fyp_real/controller/admin_controller/medicine_donated_controller.dart';
 import 'package:fyp_real/controller/admin_controller/medicine_requests_controller.dart';
+import 'package:fyp_real/screens/screens_collector.dart/collector_overview.dart';
 import 'package:fyp_real/screens/screens_pharmacy/pharmacy_overview.dart';
 import 'package:fyp_real/screens_admin/admin_overview.dart';
 import 'package:fyp_real/screens/auth_screen.dart';
@@ -77,6 +78,7 @@ class AdminApiCalling {
           Get.to(() => PharmacyOverview());
         if (data[1] == 'NGO' || data[1] == 'ngo' || data[1] == 'Ngo')
           Get.to(() => NGOOverview());
+        if (data[1] == 'Collector') Get.to(() => CollectorOverview());
         //if (response.body == 'HealthCare') Get.to(() => HCOverview());
       } else {
         print('User not found');
@@ -120,11 +122,7 @@ class AdminApiCalling {
     }
   }
 
-  Future medicineRequest(
-    String name,
-    String quantity,
-    String type,
-  ) async {
+  Future medicineRequest(String name, String quantity, String type) async {
     try {
       String uri = '$baseUrl/admins/addmedicinerequest';
       var response = await http1.post(
@@ -143,7 +141,7 @@ class AdminApiCalling {
       print(response.body);
       if (response.statusCode == 200) {
         print('inserted');
-        Get.to(() => NGOOverview());
+        Get.to(() => AdminOverview());
       } else
         print('insertion failed');
     } on Exception catch (e) {
@@ -231,6 +229,32 @@ class AdminApiCalling {
         print('There is some problem status code not 200');
         print(response.body);
       }
+    } on Exception catch (e) {
+      print(e);
+    }
+  }
+
+  Future addCollector(name, email, password) async {
+    try {
+      String uri = '$baseUrl/admins/addCollector';
+      var response = await http1.post(
+        Uri.parse(uri),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: jsonEncode(<String, String>{
+          "name": name,
+          "email": email,
+          "password": password,
+        }),
+      );
+
+      print(response.body);
+      if (response.statusCode == 200) {
+        print('inserted');
+        Get.to(() => AdminOverview());
+      } else
+        print('insertion failed');
     } on Exception catch (e) {
       print(e);
     }

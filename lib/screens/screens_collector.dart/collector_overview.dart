@@ -1,28 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
-
 import 'package:fyp_real/screens/main_functions_item.dart';
-import 'package:fyp_real/screens_donar/medicine_donated_donar.dart';
-import 'package:fyp_real/screens_donar/member_funds_donation.dart';
-import 'package:fyp_real/screens_donar/member_profile_edit.dart';
-import 'package:fyp_real/widgets_member/member_home_feature.dart';
-import 'package:fyp_real/widgets_member/member_medicine_request.dart';
+import 'package:fyp_real/screens/screens_collector.dart/collector_profile_edit.dart';
+import 'package:fyp_real/screens/screens_collector.dart/donation_requests.dart';
+import 'package:fyp_real/widgets/widgets_collector/add_medicine_form.dart';
+import 'package:fyp_real/widgets/widgets_collector/collector_home_feature.dart';
 import 'package:get/get.dart';
 
-class MemberOverview extends StatelessWidget {
-  // void _requestMedicine(BuildContext ctx) {
-  //   showModalBottomSheet(
-  //     context: ctx,
-  //     builder: (_) {
-  //       return GestureDetector(
-  //         onTap: () {},
-  //         child:
-  //         behavior: HitTestBehavior.opaque,
-  //       );
-  //     },
-  //   );
-  // }
-
+class CollectorOverview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,7 +38,7 @@ class MemberOverview extends StatelessWidget {
                   style: Theme.of(context).textTheme.headline6,
                 ),
                 onTap: () {
-                  Get.to(() => MemberProfileEdit());
+                  Get.to(() => CollectorProfileEdit());
                 },
               ),
             ),
@@ -78,7 +63,7 @@ class MemberOverview extends StatelessWidget {
         ),
       ),
       appBar: AppBar(
-        title: const Text('Donar Mode'),
+        title: const Text('Collector Mode'),
         centerTitle: true,
       ),
       body: SafeArea(
@@ -110,21 +95,14 @@ class MemberOverview extends StatelessWidget {
             ),
             Expanded(
               child: GridView(
-                children: memberHomeFeature.map((overviewFunctions) {
+                children: collectorHomeFeature.map((overviewFunctions) {
                   return InkWell(
                     onTap: () {
                       if (overviewFunctions.id == 'a1') {
-                        Get.to(() => MedicineDonateDonar());
+                        Get.to(() => DonationRequests());
                       }
                       if (overviewFunctions.id == 'a2') {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return MemberMedicineRequest();
-                            });
-                      }
-                      if (overviewFunctions.id == 'a3') {
-                        Get.to(() => MemberFundsDonation());
+                        // _addMedicine(context);
                       }
                     },
                     child: MainFunctionsItem(
@@ -145,17 +123,17 @@ class MemberOverview extends StatelessWidget {
           ]),
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Theme.of(context).primaryColor,
-        child: Icon(Icons.add),
-        onPressed: () => showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return MemberMedicineRequest();
-          },
-        ),
-      ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      // floatingActionButton: FloatingActionButton(
+      //   backgroundColor: Theme.of(context).primaryColor,
+      //   child: Icon(Icons.add),
+      //   onPressed: () => showDialog(
+      //     context: context,
+      //     builder: (BuildContext context) {
+      //       return MemberMedicineRequest();
+      //     },
+      //   ),
+      // ),
     );
   }
 }

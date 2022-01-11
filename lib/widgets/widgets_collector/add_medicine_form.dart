@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:fyp_real/controller/collector_controller/collector_api_calling.dart';
 import 'package:fyp_real/controller/date_time_picker.dart';
 import 'package:fyp_real/controller/dose_type.dart';
-import 'package:fyp_real/controller/ngo_controller/ngo_api_calling.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import '../../controller/variables.dart' as globals;
 
 final _titleController = TextEditingController();
 final _quantityController = TextEditingController();
 
 // ignore: must_be_immutable
-class NgoMedicineRequest extends StatelessWidget {
+class AddMedicineForm extends StatelessWidget {
+  var dId;
+  AddMedicineForm(id) {
+    dId = id;
+  }
   DateTimePicker dateController = Get.put(DateTimePicker());
   //DoseType doseTypeController = Get.put(DoseType());
   final doseTypeController = Get.put(DoseType());
@@ -17,18 +22,19 @@ class NgoMedicineRequest extends StatelessWidget {
 
   static final GlobalKey<FormState> _formKey = GlobalKey();
 
-  //DateTime _selectedDate = DateTime.now();
-
   void _submitData() {
     if (!_formKey.currentState!.validate()) {
       print('Incomplete');
       return;
     } else
       print('Complete');
-    NgoApiCalling().medicineRequest(
+    CollectorApiCalling().addMedicine(
       _titleController.text,
       _quantityController.text,
       doseTypeController.dropdownValue.value,
+      dateController.selectedDate.toString(),
+      globals.id,
+      dId,
     );
     Get.snackbar('Successful', 'Requested successfully!');
 
@@ -77,8 +83,7 @@ class NgoMedicineRequest extends StatelessWidget {
                   // },
                 ),
                 TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter Required Quantity'),
+                  decoration: InputDecoration(labelText: 'Enter Quantity'),
                   controller: _quantityController,
                   keyboardType: TextInputType.number,
                   validator: (val) {
@@ -127,32 +132,32 @@ class NgoMedicineRequest extends StatelessWidget {
 
                 ///--------------------------///
 
-                // Container(
-                //   height: 70,
-                //   child: Row(
-                //     children: <Widget>[
-                //       Expanded(
-                //         child: Obx(
-                //           () => Text(
-                //               '${DateTime.parse(dateController.selectedDate.toString())}'),
-                //         ),
-                //       ),
-                //       ElevatedButton(
-                //         onPressed: () =>
-                //             dateController.presentDatePicker(context),
-                //         child: Text(
-                //           'Choose Date',
-                //         ),
-                //       ),
-                //     ],
-                //   ),
-                // ),
+                Container(
+                  height: 70,
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Obx(
+                          () => Text(
+                              '${DateTime.parse(dateController.selectedDate.toString())}'),
+                        ),
+                      ),
+                      ElevatedButton(
+                        onPressed: () =>
+                            dateController.presentDatePicker(context),
+                        child: Text(
+                          'Select Expiry Date',
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 ElevatedButton(
-                  child: Text('Post Request'),
-                  // style: ElevatedButton.styleFrom(
-                  //   primary: Theme.of(context).textTheme.button!.color,
-                  //   //onPrimary: Theme.of(context).textTheme.bodyText1,
-                  // ),
+                  child: Text('Add Medicine'),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.green,
+                    //onPrimary: Theme.of(context).textTheme.bodyText1,
+                  ),
                   onPressed: _submitData,
                 ),
               ],

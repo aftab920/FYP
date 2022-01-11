@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:fyp_real/controller/ngo_controller/health_unit_type_controller.dart';
-import 'package:fyp_real/controller/ngo_controller/ngo_api_calling.dart';
+import 'package:fyp_real/controller/admin_controller/admin_api_calling.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 
-final _titleController = TextEditingController();
-final _addressController = TextEditingController();
+final _nameController = TextEditingController();
+final _emailController = TextEditingController();
+final _passwordController = TextEditingController();
 
 // ignore: must_be_immutable
-class AddHealthUnit extends StatelessWidget {
-  final healthUnitTypeController = Get.put(HealthUnitTypeContoller());
-  HealthUnitTypeContoller inst = Get.find<HealthUnitTypeContoller>();
-
+class AddUser extends StatelessWidget {
   static final GlobalKey<FormState> _formKey = GlobalKey();
 
   void _submitData() {
@@ -20,29 +16,18 @@ class AddHealthUnit extends StatelessWidget {
       return;
     } else
       print('Complete');
-    NgoApiCalling().addHealthUnit(
-      _titleController.text,
-      _addressController.text,
-      healthUnitTypeController.dropdownValue.value,
+    AdminApiCalling().addCollector(
+      _nameController.text,
+      _emailController.text,
+      _passwordController.text,
     );
     Get.snackbar('Successful', 'Requested successfully!');
-
-    // if (_quantityController.text.isEmpty) {
-    //   return;
-    // }
-    // final enteredTitle = _titleController.text;
-    // final enteredQuantity = double.parse(_quantityController.text);
-
-    // if (enteredTitle.isEmpty ||
-    //     enteredQuantity <= 0 ||
-    //     dateController.selectedDate == null) {
-    //   return;
-    // }
   }
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      reverse: true,
       child: Card(
         elevation: 5,
         child: Container(
@@ -59,11 +44,11 @@ class AddHealthUnit extends StatelessWidget {
               children: <Widget>[
                 TextFormField(
                   decoration:
-                      InputDecoration(labelText: 'Enter Health Unit Name'),
-                  controller: _titleController,
+                      InputDecoration(labelText: 'Enter Collector Name'),
+                  controller: _nameController,
                   validator: (val) {
                     if (val != null && val.isEmpty) {
-                      return 'Name is required!';
+                      return 'Collector name is required';
                     }
                     return null;
                   },
@@ -73,36 +58,29 @@ class AddHealthUnit extends StatelessWidget {
                   // },
                 ),
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'Health Unit Address'),
-                  controller: _addressController,
-                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(labelText: 'Enter Email'),
+                  controller: _emailController,
                   validator: (val) {
                     if (val != null && val.isEmpty) {
-                      return 'Address is required';
+                      return 'Email is required';
                     }
                     return null;
                   },
                   // onSubmitted: (_) => _submitData(),
                   // onChanged: (val) => amountInput = val,
                 ),
-                Obx(
-                  () => DropdownButton(
-                    hint: Text('${healthUnitTypeController.dropdownValue}'),
-                    items: healthUnitTypeController.doseType.map((newVal) {
-                      return DropdownMenuItem(
-                        value: newVal,
-                        child: Text(newVal),
-                      );
-                    }).toList(),
-                    onChanged: (value) {
-                      print(
-                          "previous ${this.healthUnitTypeController.dropdownValue}");
-                      print("selected $value");
-                      //this.doseType = value;
 
-                      healthUnitTypeController.setSelected(value);
-                    },
-                  ),
+                TextFormField(
+                  decoration: InputDecoration(labelText: 'Enter Password'),
+                  controller: _passwordController,
+                  validator: (val) {
+                    if (val != null && val.isEmpty) {
+                      return 'Password is required';
+                    }
+                    return null;
+                  },
+                  // onSubmitted: (_) => _submitData(),
+                  // onChanged: (val) => amountInput = val,
                 ),
 
                 ///--------------------------///

@@ -38,8 +38,6 @@ class _DonateMedicineNgoState extends State<DonateMedicineNgo> {
     super.initState();
   }
 
-  void showAlertDialog(BuildContext context) {}
-
   DateTime dateConversion(date) {
     return DateTime.parse(date);
   }

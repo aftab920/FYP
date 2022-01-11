@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:fyp_real/screens/main_functions_item.dart';
+import 'package:fyp_real/screens_admin/add_user.dart';
 import 'package:fyp_real/screens_admin/all_users.dart';
 import 'package:fyp_real/screens_admin/available_medicines.dart';
 import 'package:fyp_real/screens_admin/blocked_users.dart';
@@ -23,6 +24,19 @@ class AdminOverview extends StatelessWidget {
         return GestureDetector(
           onTap: () {},
           child: AdminMedicineRequest(),
+          behavior: HitTestBehavior.opaque,
+        );
+      },
+    );
+  }
+
+  void _addUser(BuildContext ctx) {
+    showModalBottomSheet(
+      context: ctx,
+      builder: (_) {
+        return GestureDetector(
+          onTap: () {},
+          child: AddUser(),
           behavior: HitTestBehavior.opaque,
         );
       },
@@ -127,7 +141,7 @@ class AdminOverview extends StatelessWidget {
                       Get.to(() => AllUsers());
                     }
                     if (overviewFunctions.id == 'a2') {
-                      Get.to(() => MedicineRequests());
+                      _addUser(context);
                     }
                     if (overviewFunctions.id == 'a3') {
                       Get.to(() => AvailableMedicines());

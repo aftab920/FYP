@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-
-import 'package:fyp_real/controller/healthUnit_controller/healthUnit_api_calling.dart';
 import 'package:fyp_real/controller/pharmacy_controller/pharmacy_api_calling.dart';
 
 import 'package:fyp_real/http_service.dart';
@@ -106,8 +104,8 @@ class _AuthCardState extends State<AuthCard> {
     //'address': "",
     //'id': ""
   };
-  String dropdownValue = 'Donar';
-  final List _loginType = ['NGO', 'Donar', 'Pharmacy', 'HealthCare'];
+  String dropdownValue = 'Donor';
+  final List _loginType = ['NGO', 'Donor', 'Pharmacy'];
 
   void submit() {
     if (!_formKey.currentState!.validate()) {
@@ -141,6 +139,7 @@ class _AuthCardState extends State<AuthCard> {
           _emailController.text,
           _passwordController.text,
           _phoneController.text,
+          _addressController.text,
           dropdownValue,
         );
       }
@@ -151,17 +150,6 @@ class _AuthCardState extends State<AuthCard> {
           _emailController.text,
           _passwordController.text,
           _ngoRegController.text,
-          _addressController.text,
-          dropdownValue,
-        );
-      }
-
-      if (dropdownValue == 'HealthCare') {
-        HUApiCalling().RegisterHC(
-          _nameController.text,
-          _emailController.text,
-          _passwordController.text,
-          _phoneController.text,
           _addressController.text,
           dropdownValue,
         );
@@ -287,8 +275,7 @@ class _AuthCardState extends State<AuthCard> {
                 if (_authMode == AuthMode.signup && dropdownValue == 'NGO' ||
                     _authMode == AuthMode.signup &&
                         dropdownValue == 'Pharmacy' ||
-                    _authMode == AuthMode.signup &&
-                        dropdownValue == 'HealthCare')
+                    _authMode == AuthMode.signup && dropdownValue == 'Donor')
                   TextFormField(
                     decoration:
                         const InputDecoration(label: Text('Enter Address')),
@@ -314,7 +301,7 @@ class _AuthCardState extends State<AuthCard> {
                           }
                         : null,
                   ),
-                if (_authMode == AuthMode.signup && dropdownValue == 'Donar' ||
+                if (_authMode == AuthMode.signup && dropdownValue == 'Donor' ||
                     _authMode == AuthMode.signup &&
                         dropdownValue == 'HealthCare')
                   Column(

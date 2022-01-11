@@ -9,8 +9,8 @@ import 'package:http/http.dart' as http1;
 import '../variables.dart' as globals;
 
 class NgoApiCalling {
-  String baseUrl = 'http://192.168.0.111/ApiDemo/api/';
-  String baseUrlMedicine = 'http://192.168.0.111/ApiDemo/api/requested_med';
+  String baseUrl = 'http://192.168.85.35/ApiDemo/api/';
+  String baseUrlMedicine = 'http://192.168.85.35/ApiDemo/api/requested_med';
 
   Future RegisterNGO(name, email, password, regNo, address, type) async {
     try {
@@ -221,6 +221,35 @@ class NgoApiCalling {
       }
     } on Exception catch (e) {
       print(e);
+      Get.to(() => NGOOverview());
+    }
+  }
+
+  Future addHealthUnit(name, address, type) async {
+    try {
+      String uri = '$baseUrl/ngo/addHealthUnit';
+      var response = await http1.post(
+        Uri.parse(uri),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: jsonEncode(<String, dynamic>{
+          "Name": name,
+          "Address": address,
+          "Type": type,
+        }),
+      );
+      print(response.body);
+      if (response.statusCode == 200) {
+        print('Added Health Unit');
+        Get.to(NGOOverview());
+      } else {
+        print('Addition failed to Health Unit');
+        Get.to(() => NGOOverview());
+      }
+    } on Exception catch (e) {
+      print(e);
+      Get.to(() => NGOOverview());
     }
   }
 

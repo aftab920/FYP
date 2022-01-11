@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fyp_real/screens/screens_collector.dart/collector_overview.dart';
 import 'package:fyp_real/screens/screens_pharmacy/pharmacy_overview.dart';
 import 'package:fyp_real/widgets_ngo/inc_dec.dart';
 
@@ -47,7 +48,7 @@ class MyApp extends StatelessWidget {
       //home: AdminOverview(),
       initialRoute: '/',
       routes: {
-        '/': (ctx) => AuthScreen(),
+        '/': (ctx) => CollectorOverview(),
         AdminOverview.routeName: (context) => AdminOverview(),
       },
       onGenerateRoute: (settings) {
