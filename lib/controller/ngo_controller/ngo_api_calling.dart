@@ -1,20 +1,23 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:fyp_real/controller/ngo_controller/all_donated_controller.dart';
 import 'package:fyp_real/controller/ngo_controller/all_health_units_controller.dart';
+import 'package:fyp_real/controller/ngo_controller/medicine_requests_controller.dart';
 import 'package:fyp_real/controller/ngo_controller/ngo_stock_controller.dart';
 import 'package:fyp_real/screens/auth_screen.dart';
 import 'package:fyp_real/screens_ngo/ngo_overview.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http1;
 import '../variables.dart' as globals;
+import '../../screens_ngo/health_unit.dart' as valueChanger;
 
 class NgoApiCalling {
-  String baseUrl = 'http://192.168.85.35/ApiDemo/api/';
   String baseUrlMedicine = 'http://192.168.85.35/ApiDemo/api/requested_med';
 
   Future RegisterNGO(name, email, password, regNo, address, type) async {
     try {
-      String uri = '$baseUrl/userData/RegisterUser';
+      String uri = '${globals.baseUrl}/userData/RegisterUser';
 
       var response = await http1.post(
         Uri.parse(uri),
@@ -44,12 +47,11 @@ class NgoApiCalling {
 
   Future getAllHealthUnits() async {
     try {
-      String uri = '$baseUrl/NGO/AllHealthUnits';
+      String uri = '${globals.baseUrl}/NGO/AllHealthUnits?id=${globals.id}';
       var response = (await http1.get(Uri.parse(uri)));
 
       if (response.statusCode == 200) {
         Get.find<AllHealthUnitsController>().allHealthUnits(response);
-        //return allRequestsController.allRequests;
       } else {
         print('There is some problem status code not 200');
         print(response.body);
@@ -61,7 +63,7 @@ class NgoApiCalling {
 
   Future getAvailableStock() async {
     try {
-      String uri = '$baseUrl/NGO/AvailableMedicines';
+      String uri = '${globals.baseUrl}/NGO/AvailableMedicines?id=${globals.id}';
       var response = (await http1.get(Uri.parse(uri)));
 
       if (response.statusCode == 200) {
@@ -78,7 +80,7 @@ class NgoApiCalling {
 
   Future medicineRequest(String name, String quantity, String type) async {
     try {
-      String uri = '$baseUrl/NGO/RequestMed';
+      String uri = '${globals.baseUrl}/NGO/RequestMed';
 
       var response = await http1.post(
         Uri.parse(uri),
@@ -95,7 +97,6 @@ class NgoApiCalling {
 
       print(response.body);
       if (response.statusCode == 200) {
-        print('Got Med');
         Get.to(() => NGOOverview());
       } else
         print('No Med');
@@ -143,7 +144,7 @@ class NgoApiCalling {
 
   Future addDonatedMedicineStock(id, quantity) async {
     try {
-      String uri = '$baseUrl/NGO/addDonatedMedicineStock';
+      String uri = '${globals.baseUrl}/NGO/addDonatedMedicineStock';
 
       var response = await http1.post(
         Uri.parse(uri),
@@ -170,7 +171,7 @@ class NgoApiCalling {
 
   Future addMedicineStock(name, quantity, type, expiryDate) async {
     try {
-      String uri = '$baseUrl/NGO/addMedicineStock';
+      String uri = '${globals.baseUrl}/NGO/addMedicineStock';
 
       var response = await http1.post(
         Uri.parse(uri),
@@ -196,25 +197,29 @@ class NgoApiCalling {
     }
   }
 
-  Future donateToHealthUnit(ngoId, medId, healthUnitId, quantity) async {
+  Future donateToHealthUnit(ngoId, medName, totalQuantity, medType, medExpiry,
+      healthUnitId, donateQuantity) async {
     try {
-      String uri = '$baseUrl/ngo/donateToHealthUnit';
+      String uri = '${globals.baseUrl}/ngo/donateToHealthUnit';
       var response = await http1.post(
         Uri.parse(uri),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8'
         },
         body: jsonEncode(<String, dynamic>{
-          "ngoId": ngoId,
-          "medId": medId,
-          "healthUnitId": healthUnitId,
-          "quantity": quantity,
+          "ngoid": ngoId.toString(),
+          "medName": medName.toString(),
+          "totalQuantity": totalQuantity.toString(),
+          "medType": medType.toString(),
+          "medExpiry": medExpiry.toString(),
+          // "medid": medId.toString(),
+          "healthUnitId": healthUnitId.toString(),
+          "donateQuantity": donateQuantity.toString(),
         }),
       );
       print(response.body);
       if (response.statusCode == 200) {
-        print('Donated to Health Unit');
-        Get.to(NGOOverview());
+        Get.to(() => NGOOverview());
       } else {
         print('Donation failed to Health Unit');
         Get.to(() => NGOOverview());
@@ -225,15 +230,18 @@ class NgoApiCalling {
     }
   }
 
-  Future addHealthUnit(name, address, type) async {
+  Future addHealthUnit(email, password, name, address, type) async {
     try {
-      String uri = '$baseUrl/ngo/addHealthUnit';
+      String uri = '${globals.baseUrl}/ngo/addHealthUnit';
       var response = await http1.post(
         Uri.parse(uri),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8'
         },
         body: jsonEncode(<String, dynamic>{
+          "NgoId": globals.id,
+          "Email": email,
+          "Password": password,
           "Name": name,
           "Address": address,
           "Type": type,
@@ -242,7 +250,7 @@ class NgoApiCalling {
       print(response.body);
       if (response.statusCode == 200) {
         print('Added Health Unit');
-        Get.to(NGOOverview());
+        Get.to(() => NGOOverview());
       } else {
         print('Addition failed to Health Unit');
         Get.to(() => NGOOverview());
@@ -253,25 +261,72 @@ class NgoApiCalling {
     }
   }
 
-  // Future findNgo() async {
-  //   try {
-  //     String uri = '$baseUrl/findngo?email=$email';
+  Future allDonatedMeds() async {
+    try {
+      String uri = '${globals.baseUrl}/ngo/allMedsDonated?id=${globals.id}';
+      var response = (await http1.get(Uri.parse(uri)));
 
-  //     var response = await http1.get(
-  //       Uri.parse(uri),
-  //       headers: <String, String>{
-  //         'Content-Type': 'application/json; charset=UTF-8'
-  //       },
-  //     );
-  //     print(response.statusCode);
-  //     print(response.body);
-  //     if (response.statusCode == 200) {
-  //       print('Signed In');
-  //       Get.to(() => NGOOverview());
-  //     } else
-  //       print('Authentication failed');
-  //   } on Exception catch (e) {
-  //     print(e);
-  //   }
-  // }
+      if (response.statusCode == 200) {
+        Get.find<AllDonatedController>().allDonatedMeds(response);
+      }
+    } on Exception catch (e) {
+      print(e);
+    }
+  }
+
+  Future acceptMedRequest(
+      healthunitstockid, medName, quantity, type, huid) async {
+    try {
+      String uri = '${globals.baseUrl}/ngo/acceptMedReq';
+      var response = await http1.post(
+        Uri.parse(uri),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: jsonEncode(<String, dynamic>{
+          "NgoId": globals.id,
+          "healthunitstockid": healthunitstockid,
+          "medName": medName,
+          "quantity": quantity,
+          "Type": type,
+          "Healthunitid": huid,
+        }),
+      );
+      print(response.body);
+      if (response.statusCode == 200) {
+        print('Successfull');
+        Get.to(() => NGOOverview());
+      } else {
+        print('Failed');
+        Get.to(() => NGOOverview());
+      }
+    } on Exception catch (e) {
+      print(e);
+      Get.to(() => NGOOverview());
+    }
+  }
+
+  Future getMedicineRequests() async {
+    try {
+      String uri =
+          '${globals.baseUrl}/ngo/allMedicineRequests?id=${globals.id}';
+
+      var response = await http1.get(
+        Uri.parse(uri),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+      );
+      print(response.body);
+      if (response.statusCode == 200) {
+        print('Successfull');
+        Get.find<MedicineRequestsController>().allMedicineRequests(response);
+      } else {
+        print('Failed');
+        Get.to(NGOOverview());
+      }
+    } on Exception catch (e) {
+      print(e);
+    }
+  }
 }

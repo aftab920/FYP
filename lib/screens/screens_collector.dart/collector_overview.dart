@@ -1,13 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
+import 'package:fyp_real/screens/auth_screen.dart';
 import 'package:fyp_real/screens/main_functions_item.dart';
+import 'package:fyp_real/screens/screens_collector.dart/collected_medicines.dart';
 import 'package:fyp_real/screens/screens_collector.dart/collector_profile_edit.dart';
 import 'package:fyp_real/screens/screens_collector.dart/donation_requests.dart';
 import 'package:fyp_real/widgets/widgets_collector/add_medicine_form.dart';
 import 'package:fyp_real/widgets/widgets_collector/collector_home_feature.dart';
 import 'package:get/get.dart';
+import '../../controller/variables.dart' as globals;
 
 class CollectorOverview extends StatelessWidget {
+  void _addMedicine(BuildContext ctx, id) {
+    showModalBottomSheet(
+      context: ctx,
+      builder: (_) {
+        return GestureDetector(
+          onTap: () {},
+          child: AddMedicineForm(id),
+          behavior: HitTestBehavior.opaque,
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +70,8 @@ class CollectorOverview extends StatelessWidget {
                         .copyWith(color: Colors.red),
                   ),
                   onTap: () {
-                    Navigator.pop(context);
+                    Get.to(() => AuthScreen());
+                    //Navigator.pop(context);
                   },
                 ),
               ),
@@ -102,7 +119,10 @@ class CollectorOverview extends StatelessWidget {
                         Get.to(() => DonationRequests());
                       }
                       if (overviewFunctions.id == 'a2') {
-                        // _addMedicine(context);
+                        _addMedicine(context, globals.donorId);
+                      }
+                      if (overviewFunctions.id == 'a3') {
+                        Get.to(() => CollectedMedicines());
                       }
                     },
                     child: MainFunctionsItem(

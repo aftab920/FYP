@@ -5,17 +5,22 @@ import 'package:fyp_real/model/home.dart';
 final pharmacyHomeFeature = [
   Home(
     'a1',
-    'Medicines Financial Donation',
-    Icon(Icons.grading_outlined),
-  ),
-  Home(
-    'a2',
     'Self Medicines Donation',
     Icon(Icons.inventory_outlined),
   ),
   Home(
+    'a2',
+    'Donation Requests By Donor',
+    Icon(Icons.inventory_outlined),
+  ),
+  Home(
     'a3',
-    'All Medicines Donate',
+    'Medicine Requests By Admin',
+    Icon(Icons.inventory_outlined),
+  ),
+  Home(
+    'a4',
+    'All Donation               ',
     Icon(Icons.inventory_outlined),
   ),
 ];

@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fyp_real/screens/screens_collector.dart/collector_overview.dart';
+import 'package:fyp_real/screens/screens_healthunit/med_requests_status.dart';
+import 'package:fyp_real/screens/screens_healthunit/test_requests.dart';
 import 'package:fyp_real/screens/screens_pharmacy/pharmacy_overview.dart';
 import 'package:fyp_real/widgets_ngo/inc_dec.dart';
 
@@ -12,7 +14,7 @@ import 'package:fyp_real/screens_ngo/ngo_overview.dart';
 import 'package:fyp_real/screens_ngo/ngo_profile_edit.dart';
 import 'package:fyp_real/screens_donar/member_overview.dart';
 import './screens_admin/medicine_requests.dart';
-
+import 'test.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 import 'package:fyp_real/screens_admin/admin_overview.dart';
@@ -48,7 +50,7 @@ class MyApp extends StatelessWidget {
       //home: AdminOverview(),
       initialRoute: '/',
       routes: {
-        '/': (ctx) => CollectorOverview(),
+        '/': (ctx) => AuthScreen(),
         AdminOverview.routeName: (context) => AdminOverview(),
       },
       onGenerateRoute: (settings) {

@@ -10,6 +10,11 @@ final collectorHomeFeature = [
   ),
   Home(
     'a2',
+    'Add Medicines',
+    Icon(Icons.grading_outlined),
+  ),
+  Home(
+    'a3',
     'Collected Medicines            ',
     Icon(Icons.inventory_outlined),
   ),

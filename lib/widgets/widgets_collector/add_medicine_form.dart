@@ -10,18 +10,29 @@ final _titleController = TextEditingController();
 final _quantityController = TextEditingController();
 
 // ignore: must_be_immutable
-class AddMedicineForm extends StatelessWidget {
+class AddMedicineForm extends StatefulWidget {
   var dId;
+  late int collectorId;
   AddMedicineForm(id) {
     dId = id;
+    collectorId = globals.id;
   }
+
+  @override
+  State<AddMedicineForm> createState() => _AddMedicineFormState();
+}
+
+class _AddMedicineFormState extends State<AddMedicineForm> {
   DateTimePicker dateController = Get.put(DateTimePicker());
+
   //DoseType doseTypeController = Get.put(DoseType());
   final doseTypeController = Get.put(DoseType());
+
   DoseType inst = Get.find<DoseType>();
 
-  static final GlobalKey<FormState> _formKey = GlobalKey();
+  GlobalKey<FormState> _formKey = GlobalKey();
 
+  @override
   void _submitData() {
     if (!_formKey.currentState!.validate()) {
       print('Incomplete');
@@ -33,8 +44,8 @@ class AddMedicineForm extends StatelessWidget {
       _quantityController.text,
       doseTypeController.dropdownValue.value,
       dateController.selectedDate.toString(),
-      globals.id,
-      dId,
+      widget.collectorId,
+      widget.dId,
     );
     Get.snackbar('Successful', 'Requested successfully!');
 

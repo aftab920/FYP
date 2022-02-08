@@ -129,6 +129,7 @@ class _AuthCardState extends State<AuthCard> {
           _emailController.text,
           _passwordController.text,
           _addressController.text,
+          _phoneController.text,
           dropdownValue,
         );
       }
@@ -303,7 +304,8 @@ class _AuthCardState extends State<AuthCard> {
                   ),
                 if (_authMode == AuthMode.signup && dropdownValue == 'Donor' ||
                     _authMode == AuthMode.signup &&
-                        dropdownValue == 'HealthCare')
+                        dropdownValue == 'HealthCare' ||
+                    _authMode == AuthMode.signup && dropdownValue == 'Pharmacy')
                   Column(
                     children: [
                       TextFormField(

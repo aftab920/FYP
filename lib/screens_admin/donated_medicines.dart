@@ -33,16 +33,17 @@ class _DonatedMedicinesState extends State<DonatedMedicines> {
             return Card(
               elevation: 5,
               child: ListTile(
-                title: Text(medDon.name),
+                leading: Icon(Icons.medical_services),
+                title: Text(medDon.medName),
                 subtitle: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     // SizedBox(
                     //   height: 15,
                     // ),
-                    Text('Quantity: ${medDon.quantity.toString()}'),
-                    Text('Donated By: ${medDon.donatedBy}'),
-                    Text('Date: ${medDon.date}'),
+                    Text('Donated To: ${medDon.name}'),
+                    Text('Quantity: ${medDon.quantity}'),
+                    //Text('Date: ${medDon.date}'),
                   ],
                 ),
               ),

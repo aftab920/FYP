@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fyp_real/controller/admin_controller/admin_api_calling.dart';
-import 'package:fyp_real/controller/admin_controller/medicine_available_controller.dart';
+import 'package:fyp_real/controller/admin_controller/medicine_stock_controller.dart';
 import 'package:get/get.dart';
 
 class AvailableMedicines extends StatefulWidget {
@@ -9,12 +9,12 @@ class AvailableMedicines extends StatefulWidget {
 }
 
 class _AvailableMedicinesState extends State<AvailableMedicines> {
-  var medAvailable;
-  late MedicineAvailableController medAvailableCtrl;
+  var medStock;
+  late MedicineStockController medStockCtrl;
   @override
   void initState() {
-    medAvailableCtrl = Get.put(MedicineAvailableController());
-    AdminApiCalling().getAvailableMedicine();
+    medStockCtrl = Get.put(MedicineStockController());
+    AdminApiCalling().getStockMedicine();
     super.initState();
   }
 
@@ -27,26 +27,26 @@ class _AvailableMedicinesState extends State<AvailableMedicines> {
       body: Obx(
         () => ListView.builder(
           itemBuilder: (context, index) {
-            medAvailable = medAvailableCtrl.allAvailable[index];
+            medStock = medStockCtrl.allStock[index];
 
             return Card(
               elevation: 5,
               child: ListTile(
-                title: Text(medAvailable.name),
+                leading: Icon(Icons.medical_services),
+                title: Text(medStock.name),
                 subtitle: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // SizedBox(
                     //   height: 15,
                     // ),
-                    Text('Quantity: ${medAvailable.quantity.toString()}'),
-                    Text('Date: ${medAvailable.date}'),
+                    Text('Quantity: ${medStock.quantity}'),
                   ],
                 ),
               ),
             );
           },
-          itemCount: medAvailableCtrl.allAvailable.length,
+          itemCount: medStockCtrl.allStock.length,
         ),
       ),
     );

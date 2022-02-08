@@ -4,7 +4,7 @@ part 'health_unit_model.g.dart';
 
 @JsonSerializable()
 class HealthUnitModel {
-  @JsonKey(name: "Huid")
+  @JsonKey(name: "Userid")
   late int id;
 
   @JsonKey(name: "Name")
@@ -16,8 +16,8 @@ class HealthUnitModel {
   @JsonKey(name: "Type")
   late String type;
 
-  @JsonKey(name: "deletestatus")
-  late String deleteStatus;
+  @JsonKey(name: "BlockStatus")
+  late int deleteStatus;
 
   HealthUnitModel();
 
@@ -26,10 +26,10 @@ class HealthUnitModel {
   Map<String, dynamic> toJson() => _$HealthUnitModelToJson(this);
 
   HealthUnitModel.fromMap(Map<String, dynamic> mp) {
-    id = mp['Huid'];
+    id = mp['Userid'];
     name = mp['Name'];
     address = mp['Address'];
     type = mp['Type'];
-    deleteStatus = mp['deletestatus'];
+    deleteStatus = mp['BlockStatus'];
   }
 }

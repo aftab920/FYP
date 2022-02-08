@@ -1,0 +1,55 @@
+import 'package:flutter/material.dart';
+import 'package:fyp_real/controller/admin_controller/admin_api_calling.dart';
+import 'package:fyp_real/controller/admin_controller/pharmacy_controller.dart';
+import 'package:get/get.dart';
+
+class PharmaciesList extends StatefulWidget {
+  @override
+  State<PharmaciesList> createState() => _PharmaciesListState();
+}
+
+class _PharmaciesListState extends State<PharmaciesList> {
+  var pharmacy;
+  late PharmacyController pharmCtrl;
+
+  @override
+  void initState() {
+    pharmCtrl = Get.put(PharmacyController());
+    AdminApiCalling().getPharmacies();
+    super.initState();
+  }
+
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('All Pharmacies'),
+      ),
+      body: Obx(
+        () => ListView.builder(
+          itemBuilder: (context, index) {
+            pharmacy = pharmCtrl.pharmacylist[index];
+
+            return Card(
+              elevation: 5,
+              child: ListTile(
+                leading: Icon(Icons.medical_services),
+                title: Text(pharmacy.name),
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 15,
+                    ),
+                    //Text('Amount: ${pharmacy.cash}'),
+                    Text('Address: ${pharmacy.address}'),
+                  ],
+                ),
+              ),
+            );
+          },
+          itemCount: pharmCtrl.pharmacylist.length,
+        ),
+      ),
+    );
+  }
+}

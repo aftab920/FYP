@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
+import 'package:fyp_real/screens/auth_screen.dart';
 import 'package:fyp_real/screens/main_functions_item.dart';
 import 'package:fyp_real/screens_admin/add_user.dart';
 import 'package:fyp_real/screens_admin/all_users.dart';
@@ -89,7 +90,7 @@ class AdminOverview extends StatelessWidget {
                         .copyWith(color: Colors.red),
                   ),
                   onTap: () {
-                    Navigator.pop(context);
+                    Get.to(() => AuthScreen());
                   },
                 ),
               ),
@@ -143,16 +144,16 @@ class AdminOverview extends StatelessWidget {
                     if (overviewFunctions.id == 'a2') {
                       _addUser(context);
                     }
-                    if (overviewFunctions.id == 'a3') {
+                    if (overviewFunctions.id == 'a4') {
                       Get.to(() => AvailableMedicines());
                     }
-                    if (overviewFunctions.id == 'a4') {
+                    if (overviewFunctions.id == 'a5') {
                       Get.to(() => Wishlist());
                     }
-                    if (overviewFunctions.id == 'a5') {
+                    if (overviewFunctions.id == 'a6') {
                       Get.to(() => DonatedMedicines());
                     }
-                    if (overviewFunctions.id == 'a4') {
+                    if (overviewFunctions.id == 'a7') {
                       Get.to(() => BlockedUsers());
                     }
                   },

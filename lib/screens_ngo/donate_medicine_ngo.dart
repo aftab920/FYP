@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fyp_real/controller/ngo_controller/all_health_units_controller.dart';
 import 'package:fyp_real/controller/ngo_controller/ngo_api_calling.dart';
 import 'package:fyp_real/controller/ngo_controller/ngo_stock_controller.dart';
-import 'package:fyp_real/screens_ngo/donate_med_2.dart';
+
 import 'package:fyp_real/screens_ngo/health_unit.dart';
 import 'package:get/get.dart';
 import '../controller/variables.dart' as globals;
@@ -183,8 +183,12 @@ class _DonateMedicineNgoState extends State<DonateMedicineNgo> {
                                                                           () {
                                                                         NgoApiCalling().donateToHealthUnit(
                                                                             globals.id,
-                                                                            availableMedicines.id,
-                                                                            healthUnits.id,
+                                                                            //ngoStockCtrl.availableMedicines[indexMed].id,
+                                                                            ngoStockCtrl.availableMedicines[indexMed].name,
+                                                                            ngoStockCtrl.availableMedicines[indexMed].quantity,
+                                                                            ngoStockCtrl.availableMedicines[indexMed].type,
+                                                                            ngoStockCtrl.availableMedicines[indexMed].expiryDate,
+                                                                            healthUnitCtrl.healthUnits[indexHospital].id,
                                                                             _quantityController.text);
                                                                       },
                                                                       child: Text(

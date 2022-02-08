@@ -4,8 +4,8 @@ part 'ngo_stock_model.g.dart';
 
 @JsonSerializable()
 class NgoStockModel {
-  @JsonKey(name: "Ngostockid")
-  late int id;
+  // @JsonKey(name: "Ngostockid")
+  // late int id;
 
   @JsonKey(name: "MedName")
   late String name;
@@ -19,8 +19,8 @@ class NgoStockModel {
   @JsonKey(name: "Expiry")
   late String expiryDate;
 
-  @JsonKey(name: "Status")
-  late String status;
+  // @JsonKey(name: "Status")
+  // late String status;
 
   NgoStockModel();
 
@@ -29,11 +29,11 @@ class NgoStockModel {
   Map<String, dynamic> toJson() => _$NgoStockModelToJson(this);
 
   NgoStockModel.fromMap(Map<String, dynamic> mp) {
-    id = mp['Ngostockid'];
+    // id = mp['Ngostockid'];
     name = mp['Medname'];
     quantity = mp['Quantity'];
     expiryDate = mp['Expiry'];
     type = mp['Type'];
-    status = mp['Status'];
+//    status = mp['Status'];
   }
 }

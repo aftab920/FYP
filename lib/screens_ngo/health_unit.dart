@@ -12,7 +12,10 @@ class HealthUnit extends StatefulWidget {
 class _HealthUnitState extends State<HealthUnit> {
   var healthUnits;
   late AllHealthUnitsController healthUnitCtrl;
-  bool value = false;
+
+  // static changeValueNullCheck() {
+  //   nullCheck = true;
+  // }
 
   @override
   void initState() {
@@ -47,23 +50,26 @@ class _HealthUnitState extends State<HealthUnit> {
               child: ListView.builder(
                 itemBuilder: (context, index) {
                   healthUnits = healthUnitCtrl.healthUnits[index];
-
-                  return Card(
-                    elevation: 5,
-                    child: ListTile(
-                      title: Text(healthUnits.name),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          // SizedBox(
-                          //   height: 15,
-                          // ),
-                          Text('Address: ${healthUnits.address}'),
-                          Text('Health Unit Type: ${healthUnits.type}'),
-                        ],
+                  if (healthUnits != null) {
+                    return Card(
+                      elevation: 5,
+                      child: ListTile(
+                        title: Text(healthUnits.name),
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            // SizedBox(
+                            //   height: 15,
+                            // ),
+                            Text('Address: ${healthUnits.address}'),
+                            Text('Health Unit Type: ${healthUnits.type}'),
+                          ],
+                        ),
                       ),
-                    ),
-                  );
+                    );
+                  } else {
+                    return Text('No Data Found');
+                  }
                 },
                 itemCount: healthUnitCtrl.healthUnits.length,
               ),

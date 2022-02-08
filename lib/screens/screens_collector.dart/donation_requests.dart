@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fyp_real/controller/collector_controller/collector_api_calling.dart';
-import 'package:fyp_real/controller/collector_controller/donation_requests_controller.dart';
+import 'package:fyp_real/controller/collector_controller/collector_donation_requests_controller.dart';
 import 'package:fyp_real/widgets/widgets_collector/add_medicine_form.dart';
 import 'package:get/get.dart';
 import '../../controller/variables.dart' as globals;
@@ -11,9 +11,8 @@ class DonationRequests extends StatefulWidget {
 }
 
 class _DonationRequestsState extends State<DonationRequests> {
-  var donorId;
   var donReq;
-  late DonationRequestsController allReqCtrl;
+  late CollectorDonationRequestsController allReqCtrl;
   // = Get.find<MedicineRequestsController>();
 
   void _addMedicine(BuildContext ctx, id) {
@@ -31,7 +30,7 @@ class _DonationRequestsState extends State<DonationRequests> {
 
   @override
   void initState() {
-    allReqCtrl = Get.put(DonationRequestsController());
+    allReqCtrl = Get.put(CollectorDonationRequestsController());
     CollectorApiCalling().getDonationRequests();
     super.initState();
   }
@@ -63,9 +62,9 @@ class _DonationRequestsState extends State<DonationRequests> {
                       ElevatedButton(
                         child: Text('✔'),
                         onPressed: () {
-                          donorId = donReq.id;
-                          CollectorApiCalling().acceptDonation(donReq.id);
-                          _addMedicine(context, donorId);
+                          globals.donorId = allReqCtrl.allRequests[index].id;
+                          CollectorApiCalling().acceptDonation(globals.donorId);
+                          _addMedicine(context, globals.donorId);
                         },
                         style: ElevatedButton.styleFrom(primary: Colors.green),
                       ),

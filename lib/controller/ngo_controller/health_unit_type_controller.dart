@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
 
 class HealthUnitTypeContoller extends GetxController {
-  var dropdownValue = 'Select Health Unit Type'.obs;
-  List doseType = [
+  var dropdownValue = 'Health Unit Type'.obs;
+  List healthUnitType = [
     'Health Care',
-    'Hospital',
+    'Free Meds',
     'Nursing Care',
   ].obs;
 

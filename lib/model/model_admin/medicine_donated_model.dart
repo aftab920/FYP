@@ -5,19 +5,13 @@ part 'medicine_donated_model.g.dart';
 
 @JsonSerializable()
 class MedicineDonatedModel {
-  @JsonKey(name: "Id")
-  late int id;
-
   @JsonKey(name: "Name")
   late String name;
 
-  @JsonKey(name: "Donated_By")
-  late String donatedBy;
+  @JsonKey(name: "Medname")
+  late String medName;
 
-  @JsonKey(name: "Date")
-  late String date;
-
-  @JsonKey(name: "Quantity")
+  @JsonKey(name: "quantity")
   late int quantity;
 
   MedicineDonatedModel();
@@ -27,10 +21,8 @@ class MedicineDonatedModel {
   Map<String, dynamic> toJson() => _$MedicineDonatedModelToJson(this);
 
   MedicineDonatedModel.fromMap(Map<String, dynamic> mp) {
-    id = mp['Id'];
     name = mp['Name'];
-    donatedBy = mp['Donated_By'];
-    date = mp['Date'];
-    quantity = mp['Quantity'];
+    medName = mp['Medname'];
+    quantity = mp['quantity'];
   }
 }

@@ -1,44 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
+import 'package:fyp_real/screens/auth_screen.dart';
 import 'package:fyp_real/screens/main_functions_item.dart';
-import 'package:fyp_real/screens/screens_pharmacy/medicine_donated_pharmacy.dart';
+import 'package:fyp_real/screens/screens_pharmacy/donation_requests_by_donor.dart';
+import 'package:fyp_real/screens/screens_pharmacy/medicine_requests_by_admin.dart';
+import 'package:fyp_real/screens/screens_pharmacy/pharmacy_donated.dart';
 import 'package:fyp_real/screens/screens_pharmacy/pharmacy_profile_edit.dart';
-import 'package:fyp_real/screens_admin/all_users.dart';
-import 'package:fyp_real/screens_admin/medicine_requests.dart';
-import 'package:fyp_real/screens_admin/profile_edit.dart';
-import 'package:fyp_real/widgets/widgets_pharmacy/medicine_financial_donation.dart';
 import 'package:fyp_real/widgets/widgets_pharmacy/pharmacy_home_feature.dart';
 import 'package:fyp_real/widgets/widgets_pharmacy/pharmacy_medicine_request.dart';
 
 import 'package:get/get.dart';
 
 class PharmacyOverview extends StatelessWidget {
-  void _requestMedicine(BuildContext ctx) {
-    showModalBottomSheet(
-      context: ctx,
-      builder: (_) {
-        return GestureDetector(
-          onTap: () {},
-          child: PharmacyMedicineRequest(),
-          behavior: HitTestBehavior.opaque,
-        );
-      },
-    );
-  }
-
-  void _medicineFinancialDonation(BuildContext ctx) {
-    showModalBottomSheet(
-      context: ctx,
-      builder: (_) {
-        return GestureDetector(
-          onTap: () {},
-          child: MedicineFinancialDonation(),
-          behavior: HitTestBehavior.opaque,
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,7 +58,7 @@ class PharmacyOverview extends StatelessWidget {
                         .copyWith(color: Colors.red),
                   ),
                   onTap: () {
-                    Navigator.pop(context);
+                    Get.to(() => AuthScreen());
                   },
                 ),
               ),
@@ -134,13 +107,20 @@ class PharmacyOverview extends StatelessWidget {
                 return InkWell(
                   onTap: () {
                     if (overviewFunctions.id == 'a1') {
-                      _medicineFinancialDonation(context);
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return PharmacyMedicineRequest();
+                          });
                     }
                     if (overviewFunctions.id == 'a2') {
-                      _requestMedicine(context);
+                      Get.to(() => DonationRequestsByDonor());
                     }
                     if (overviewFunctions.id == 'a3') {
-                      Get.to(() => MedicineDonatedPharmacy());
+                      Get.to(() => MedicineRequestsByAdmin());
+                    }
+                    if (overviewFunctions.id == 'a4') {
+                      Get.to(() => PharmacyDonated());
                     }
                   },
                   child: MainFunctionsItem(
@@ -164,7 +144,12 @@ class PharmacyOverview extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).primaryColor,
         child: Icon(Icons.add),
-        onPressed: () => _requestMedicine(context),
+        onPressed: () => showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return PharmacyMedicineRequest();
+          },
+        ),
       ),
     );
   }

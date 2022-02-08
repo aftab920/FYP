@@ -78,8 +78,27 @@ class AdminMedicineRequest extends StatelessWidget {
                   //onSubmitted: (_) => _submitData(),
                   //onChanged: (val) => amountInput = val,
                 ),
+                Obx(
+                  () => DropdownButton(
+                    hint: Text('${doseTypeController.dropdownValue}'),
+                    items: doseTypeController.doseType.map((newVal) {
+                      return DropdownMenuItem(
+                        value: newVal,
+                        child: Text(newVal),
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      print(
+                          "previous ${this.doseTypeController.dropdownValue}");
+                      print("selected $value");
+                      //this.doseType = value;
+
+                      doseTypeController.setSelected(value);
+                    },
+                  ),
+                ),
                 Container(
-                  height: 70,
+                  height: 30,
                 ),
                 ElevatedButton(
                   child: Text('Post Request'),

@@ -13,8 +13,8 @@ class PharmacyModel {
   @JsonKey(name: "Address")
   late String address;
 
-  @JsonKey(name: "BlockStatus")
-  late int blockStatus;
+  // @JsonKey(name: "AvailableCash")
+  // late int cash;
 
   PharmacyModel();
 
@@ -26,6 +26,6 @@ class PharmacyModel {
     id = mp['Userid'];
     name = mp['Name'];
     address = mp['Address'];
-    blockStatus = mp['BlockStatus'];
+    // cash = mp['AvailableCash'];
   }
 }

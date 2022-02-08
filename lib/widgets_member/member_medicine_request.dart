@@ -63,6 +63,7 @@ class MemberMedicineRequest extends StatelessWidget {
                     MemberApiCalling().DonateMed(
                       globals.id,
                     );
+                    Navigator.pop(context);
                   },
                   child: Text('Donate Now'),
                 ),

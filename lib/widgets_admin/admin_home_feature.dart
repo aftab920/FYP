@@ -11,12 +11,7 @@ final homeFeature = [
   ),
   Home(
     'a2',
-    'Add User              ',
-    Icon(Icons.notifications_active),
-  ),
-  Home(
-    'a3',
-    'Medicine Requests         ',
+    'Add Collector              ',
     Icon(Icons.notifications_active),
   ),
   Home(

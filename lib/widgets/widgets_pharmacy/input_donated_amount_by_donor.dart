@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:fyp_real/controller/date_time_picker.dart';
+import 'package:fyp_real/controller/pharmacy_controller/pharmacy_api_calling.dart';
+import 'package:get/get.dart';
+import '../../controller/variables.dart' as globals;
 
 final _amountController = TextEditingController();
-bool _pharmacyFlag = false;
 
-class MedicineFinancialDonation extends StatelessWidget {
+class InputDonatedAmountByDonor extends StatelessWidget {
   @override
 
 // void _submitData() {
@@ -34,7 +37,7 @@ class MedicineFinancialDonation extends StatelessWidget {
             children: [
               TextField(
                 decoration: InputDecoration(
-                  labelText: 'Donation Amount',
+                  labelText: 'Received Amount',
                 ),
                 controller: _amountController,
                 onSubmitted: (String line) => () {
@@ -45,13 +48,17 @@ class MedicineFinancialDonation extends StatelessWidget {
                 height: 40,
               ),
               ElevatedButton(
-                child: Text('Donate'),
+                child: Text('Confirm Acception'),
                 style: ElevatedButton.styleFrom(
                   primary: Colors.green,
 
                   //onPrimary: Theme.of(context).textTheme.bodyText1,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  PharmacyApiCalling().acceptDonation(
+                      globals.id, globals.donorId, _amountController.text);
+                  Navigator.pop(context);
+                },
               ),
             ],
           ),

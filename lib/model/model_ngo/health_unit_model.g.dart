@@ -8,17 +8,17 @@ part of 'health_unit_model.dart';
 
 HealthUnitModel _$HealthUnitModelFromJson(Map<String, dynamic> json) =>
     HealthUnitModel()
-      ..id = json['Huid'] as int
+      ..id = json['Userid'] as int
       ..name = json['Name'] as String
       ..address = json['Address'] as String
       ..type = json['Type'] as String
-      ..deleteStatus = json['deletestatus'] as String;
+      ..deleteStatus = json['BlockStatus'] as int;
 
 Map<String, dynamic> _$HealthUnitModelToJson(HealthUnitModel instance) =>
     <String, dynamic>{
-      'Huid': instance.id,
+      'Userid': instance.id,
       'Name': instance.name,
       'Address': instance.address,
       'Type': instance.type,
-      'deletestatus': instance.deleteStatus,
+      'BlockStatus': instance.deleteStatus,
     };

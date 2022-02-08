@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
+import 'package:fyp_real/screens/auth_screen.dart';
 
 import 'package:fyp_real/screens/main_functions_item.dart';
 import 'package:fyp_real/screens_donar/medicine_donated_donar.dart';
@@ -69,7 +70,8 @@ class MemberOverview extends StatelessWidget {
                         .copyWith(color: Colors.red),
                   ),
                   onTap: () {
-                    Navigator.pop(context);
+                    Get.to(() => AuthScreen());
+                    // Navigator.pop(context);
                   },
                 ),
               ),
@@ -114,7 +116,7 @@ class MemberOverview extends StatelessWidget {
                   return InkWell(
                     onTap: () {
                       if (overviewFunctions.id == 'a1') {
-                        Get.to(() => MedicineDonateDonar());
+                        Get.to(() => MedicineDonatedDonar());
                       }
                       if (overviewFunctions.id == 'a2') {
                         showDialog(

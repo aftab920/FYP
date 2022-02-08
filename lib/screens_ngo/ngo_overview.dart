@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
+import 'package:fyp_real/screens/auth_screen.dart';
 
 import 'package:fyp_real/screens/main_functions_item.dart';
 import 'package:fyp_real/screens_admin/donated_medicines.dart';
+import 'package:fyp_real/screens_ngo/all_donated.dart';
 import 'package:fyp_real/screens_ngo/donate_medicine_ngo.dart';
 import 'package:fyp_real/screens_ngo/health_unit.dart';
+import 'package:fyp_real/screens_ngo/medicine_requests.dart';
 import 'package:fyp_real/screens_ngo/ngo_profile_edit.dart';
 import 'package:fyp_real/widgets_ngo/ngo_medicine_request.dart';
 import 'package:fyp_real/widgets_ngo/ngo_home_feature.dart';
@@ -87,7 +90,7 @@ class NGOOverview extends StatelessWidget {
                         .copyWith(color: Colors.red),
                   ),
                   onTap: () {
-                    Navigator.pop(context);
+                    Get.to(() => AuthScreen());
                   },
                 ),
               ),
@@ -139,6 +142,12 @@ class NGOOverview extends StatelessWidget {
                       }
                       if (overviewFunctions.id == 'a3') {
                         Get.to(() => HealthUnit());
+                      }
+                      if (overviewFunctions.id == 'a4') {
+                        Get.to(() => MedicineRequests());
+                      }
+                      if (overviewFunctions.id == 'a5') {
+                        Get.to(() => AllDonated());
                       }
                     },
                     child: MainFunctionsItem(

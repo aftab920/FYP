@@ -6,7 +6,7 @@ import 'package:fyp_real/controller/donar_controller/pharmacy_controller.dart';
 import 'package:fyp_real/controller/ngo_controller/all_health_units_controller.dart';
 import 'package:fyp_real/controller/ngo_controller/ngo_api_calling.dart';
 import 'package:fyp_real/controller/ngo_controller/ngo_stock_controller.dart';
-import 'package:fyp_real/screens_ngo/donate_med_2.dart';
+
 import 'package:fyp_real/screens_ngo/health_unit.dart';
 import 'package:get/get.dart';
 import '../controller/variables.dart' as globals;
@@ -116,8 +116,10 @@ class _MemberFundsDonationState extends State<MemberFundsDonation> {
                                             onPressed: () {
                                               MemberApiCalling().donateFunds(
                                                   globals.id,
-                                                  pharmacy.id,
+                                                  pharmacyCtrl
+                                                      .pharmacies[indexMed].id,
                                                   _quantityController.text);
+                                              Navigator.pop(context);
                                             },
                                             child: Text('Donate'),
                                           )

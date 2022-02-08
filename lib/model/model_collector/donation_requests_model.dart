@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'donation_requests_model.g.dart';
 
 @JsonSerializable()
-class DonationRequestsModel {
+class CollectorDonationRequestsModel {
   @JsonKey(name: "Userid")
   late int id;
 
@@ -13,13 +13,13 @@ class DonationRequestsModel {
   @JsonKey(name: "Address")
   late String address;
 
-  DonationRequestsModel();
+  CollectorDonationRequestsModel();
 
-  factory DonationRequestsModel.fromJson(Map<String, dynamic> json) =>
-      _$DonationRequestsModelFromJson(json);
-  Map<String, dynamic> toJson() => _$DonationRequestsModelToJson(this);
+  factory CollectorDonationRequestsModel.fromJson(Map<String, dynamic> json) =>
+      _$CollectorDonationRequestsModelFromJson(json);
+  Map<String, dynamic> toJson() => _$CollectorDonationRequestsModelToJson(this);
 
-  DonationRequestsModel.fromMap(Map<String, dynamic> mp) {
+  CollectorDonationRequestsModel.fromMap(Map<String, dynamic> mp) {
     id = mp['Userid'];
     name = mp['Name'];
     address = mp['Address'];

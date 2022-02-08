@@ -4,14 +4,17 @@ part 'all_users_model.g.dart';
 
 @JsonSerializable()
 class AllUsersModel {
+  @JsonKey(name: "Userid")
+  late int id;
+
   @JsonKey(name: "Name")
   late String name;
 
   @JsonKey(name: "Email")
   late String email;
 
-  @JsonKey(name: "Phone")
-  late String phone;
+  @JsonKey(name: "Type")
+  late String type;
 
   AllUsersModel();
 
@@ -20,8 +23,9 @@ class AllUsersModel {
   Map<String, dynamic> toJson() => _$AllUsersModelToJson(this);
 
   AllUsersModel.fromMap(Map<String, dynamic> mp) {
+    id = mp['Userid'];
     name = mp['Name'];
     email = mp['Email'];
-    phone = mp['Phone'];
+    type = mp['Type'];
   }
 }

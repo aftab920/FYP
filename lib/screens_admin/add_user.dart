@@ -21,7 +21,6 @@ class AddUser extends StatelessWidget {
       _emailController.text,
       _passwordController.text,
     );
-    Get.snackbar('Successful', 'Requested successfully!');
   }
 
   @override
@@ -106,13 +105,24 @@ class AddUser extends StatelessWidget {
                 //   ),
                 // ),
                 ElevatedButton(
-                  child: Text('Post Request'),
-                  // style: ElevatedButton.styleFrom(
-                  //   primary: Theme.of(context).textTheme.button!.color,
-                  //   //onPrimary: Theme.of(context).textTheme.bodyText1,
-                  // ),
-                  onPressed: _submitData,
-                ),
+                    child: Text('Post Request'),
+                    // style: ElevatedButton.styleFrom(
+                    //   primary: Theme.of(context).textTheme.button!.color,
+                    //   //onPrimary: Theme.of(context).textTheme.bodyText1,
+                    // ),
+                    onPressed: () {
+                      if (!_formKey.currentState!.validate()) {
+                        print('Incomplete');
+                        return;
+                      } else
+                        print('Complete');
+                      AdminApiCalling().addCollector(
+                        _nameController.text,
+                        _emailController.text,
+                        _passwordController.text,
+                      );
+                      Navigator.pop(context);
+                    }),
               ],
             ),
           ),

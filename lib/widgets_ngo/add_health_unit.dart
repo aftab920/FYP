@@ -6,6 +6,8 @@ import 'package:intl/intl.dart';
 
 final _titleController = TextEditingController();
 final _addressController = TextEditingController();
+final _emailController = TextEditingController();
+final _passwordController = TextEditingController();
 
 // ignore: must_be_immutable
 class AddHealthUnit extends StatelessWidget {
@@ -21,23 +23,13 @@ class AddHealthUnit extends StatelessWidget {
     } else
       print('Complete');
     NgoApiCalling().addHealthUnit(
+      _emailController.text,
+      _passwordController.text,
       _titleController.text,
       _addressController.text,
       healthUnitTypeController.dropdownValue.value,
     );
     Get.snackbar('Successful', 'Requested successfully!');
-
-    // if (_quantityController.text.isEmpty) {
-    //   return;
-    // }
-    // final enteredTitle = _titleController.text;
-    // final enteredQuantity = double.parse(_quantityController.text);
-
-    // if (enteredTitle.isEmpty ||
-    //     enteredQuantity <= 0 ||
-    //     dateController.selectedDate == null) {
-    //   return;
-    // }
   }
 
   @override
@@ -58,8 +50,7 @@ class AddHealthUnit extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[
                 TextFormField(
-                  decoration:
-                      InputDecoration(labelText: 'Enter Health Unit Name'),
+                  decoration: InputDecoration(labelText: 'Enter Name'),
                   controller: _titleController,
                   validator: (val) {
                     if (val != null && val.isEmpty) {
@@ -72,6 +63,29 @@ class AddHealthUnit extends StatelessWidget {
                   //   enteredTitle = val;
                   // },
                 ),
+                TextFormField(
+                  decoration: InputDecoration(labelText: 'Enter Email'),
+                  controller: _emailController,
+                  keyboardType: TextInputType.number,
+                  validator: (val) {
+                    if (val != null && val.isEmpty) {
+                      return 'Email is required';
+                    }
+                    return null;
+                  },
+                ),
+                TextFormField(
+                  decoration: InputDecoration(labelText: 'Enter Password'),
+                  controller: _passwordController,
+                  keyboardType: TextInputType.number,
+                  validator: (val) {
+                    if (val != null && val.isEmpty) {
+                      return 'Password is required';
+                    }
+                    return null;
+                  },
+                ),
+
                 TextFormField(
                   decoration: InputDecoration(labelText: 'Health Unit Address'),
                   controller: _addressController,
@@ -88,7 +102,8 @@ class AddHealthUnit extends StatelessWidget {
                 Obx(
                   () => DropdownButton(
                     hint: Text('${healthUnitTypeController.dropdownValue}'),
-                    items: healthUnitTypeController.doseType.map((newVal) {
+                    items:
+                        healthUnitTypeController.healthUnitType.map((newVal) {
                       return DropdownMenuItem(
                         value: newVal,
                         child: Text(newVal),
@@ -128,7 +143,7 @@ class AddHealthUnit extends StatelessWidget {
                 //   ),
                 // ),
                 ElevatedButton(
-                  child: Text('Post Request'),
+                  child: Text('Add Now'),
                   // style: ElevatedButton.styleFrom(
                   //   primary: Theme.of(context).textTheme.button!.color,
                   //   //onPrimary: Theme.of(context).textTheme.bodyText1,

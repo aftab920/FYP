@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fyp_real/controller/admin_controller/admin_api_calling.dart';
+import 'package:fyp_real/controller/admin_controller/wishlist_controller.dart';
+import 'package:fyp_real/screens_admin/pharmacies_list.dart';
+import 'package:get/get.dart';
 
 class Wishlist extends StatefulWidget {
   @override
@@ -6,107 +10,42 @@ class Wishlist extends StatefulWidget {
 }
 
 class _WishlistState extends State<Wishlist> {
-  bool value = false;
+  var med;
+  late WishlistController wishCtrl;
   @override
+  void initState() {
+    wishCtrl = Get.put(WishlistController());
+    AdminApiCalling().getWishlist();
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Wishlist'),
       ),
-      body: Column(
-        children: [
-          Card(
-            elevation: 5,
-            child: ListTile(
-              leading: Checkbox(
-                value: this.value,
-                onChanged: (bool? value) {
-                  setState(() {
-                    this.value = value!;
-                  });
-                },
-              ),
-              title: Text('De-Watson'),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  // SizedBox(
-                  //   height: 15,
-                  // ),
-                  Text('Email: info@dewatson.com'),
-                  Text('Phone: 0302690'),
-                ],
-              ),
-            ),
-          ),
-          Card(
-            elevation: 5,
-            child: ListTile(
-              leading: Checkbox(
-                value: this.value,
-                onChanged: (bool? value) {
-                  setState(() {
-                    this.value = value!;
-                  });
-                },
-              ),
-              title: Text('Edhi'),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  // SizedBox(
-                  //   height: 15,
-                  // ),
-                  Text('Email: info@edhi.com'),
-                  Text('Phone: 0302661'),
-                ],
-              ),
-            ),
-          ),
-          Card(
-            elevation: 5,
-            child: ListTile(
-              leading: Checkbox(
-                value: this.value,
-                onChanged: (bool? value) {
-                  setState(() {
-                    this.value = value!;
-                  });
-                },
-              ),
-              title: Text('Ahmad'),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  // SizedBox(
-                  //   height: 15,
-                  // ),
-                  Text('Email: ahmad@gmail.com'),
-                  Text('Phone: 0302600009'),
-                ],
-              ),
-            ),
-          ),
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height / 3,
-            child: Stack(
-              children: [
-                Positioned(
-                  top: 15,
-                  right: 20,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: Text(
-                      'Remove',
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  ),
+      body: Obx(
+        () => ListView.builder(
+          itemBuilder: (context, index) {
+            med = wishCtrl.wishlist[index];
+            return Card(
+              color: Colors.green,
+              elevation: 5,
+              child: ListTile(
+                leading: Icon(Icons.medical_services),
+                title: Text(med.name),
+                subtitle: Text(med.type),
+                trailing: ElevatedButton(
+                  child: Text('Get Medicine'),
+                  onPressed: () {
+                    Get.to(() => PharmaciesList());
+                  },
                 ),
-              ],
-            ),
-          )
-        ],
+              ),
+            );
+          },
+          itemCount: wishCtrl.wishlist.length,
+        ),
       ),
     );
   }

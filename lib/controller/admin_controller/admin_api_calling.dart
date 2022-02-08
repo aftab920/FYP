@@ -4,7 +4,11 @@ import 'package:fyp_real/controller/admin_controller/all_users_controller.dart';
 import 'package:fyp_real/controller/admin_controller/medicine_available_controller.dart';
 import 'package:fyp_real/controller/admin_controller/medicine_donated_controller.dart';
 import 'package:fyp_real/controller/admin_controller/medicine_requests_controller.dart';
+import 'package:fyp_real/controller/admin_controller/medicine_stock_controller.dart';
+import 'package:fyp_real/controller/admin_controller/pharmacy_controller.dart';
+import 'package:fyp_real/controller/admin_controller/wishlist_controller.dart';
 import 'package:fyp_real/screens/screens_collector.dart/collector_overview.dart';
+import 'package:fyp_real/screens/screens_healthunit/healthunit_overview.dart';
 import 'package:fyp_real/screens/screens_pharmacy/pharmacy_overview.dart';
 import 'package:fyp_real/screens_admin/admin_overview.dart';
 import 'package:fyp_real/screens/auth_screen.dart';
@@ -18,13 +22,13 @@ class AdminApiCalling {
   static late String email;
   //final allRequestsController = Get.put(MedicineRequestsController());
 
-  String baseUrl = 'http://192.168.0.111/ApiDemo/api/';
+  //String baseUrl = 'http://192.168.143.35/ApiDemo/api/';
   // String baseUrl = 'http://192.168.100.44/ApiDemo/api/';   // SZ 1st Floor
   // String baseUrl = 'http://192.168.100.202/ApiDemo/api/';  // Home
 
   Future RegisterAdmin(email, password) async {
     try {
-      String uri = '$baseUrl/admins/RegisterAdmin';
+      String uri = '${globals.baseUrl}/admins/RegisterAdmin';
 
       var response = await http1.post(
         Uri.parse(uri),
@@ -51,7 +55,7 @@ class AdminApiCalling {
   Future LoginAdmin(email, password) async {
     try {
       String uri =
-          '$baseUrl/userdata/LoginUser?email=$email&password=$password';
+          '${globals.baseUrl}/userdata/LoginUser?email=$email&password=$password';
       /////////// C A S E 1 ----------
 
       var response = await http1.get(
@@ -78,7 +82,11 @@ class AdminApiCalling {
           Get.to(() => PharmacyOverview());
         if (data[1] == 'NGO' || data[1] == 'ngo' || data[1] == 'Ngo')
           Get.to(() => NGOOverview());
-        if (data[1] == 'Collector') Get.to(() => CollectorOverview());
+        if (data[1] == 'Collector' || data[1] == 'collector')
+          Get.to(() => CollectorOverview());
+        if (data[1] == 'Health Care' ||
+            data[1] == 'Free Meds' ||
+            data[1] == 'Nursing Care') Get.to(() => HealthUnitOverview());
         //if (response.body == 'HealthCare') Get.to(() => HCOverview());
       } else {
         print('User not found');
@@ -124,7 +132,7 @@ class AdminApiCalling {
 
   Future medicineRequest(String name, String quantity, String type) async {
     try {
-      String uri = '$baseUrl/admins/addmedicinerequest';
+      String uri = '${globals.baseUrl}/admins/addmedicinerequest';
       var response = await http1.post(
         Uri.parse(uri),
         headers: <String, String>{
@@ -154,7 +162,7 @@ class AdminApiCalling {
     try {
       // response = await Dio()
       //     .get('http://192.168.170.35/WebAPIDemo/api/users/allusers');
-      String uri = '$baseUrl/admins/allRequestedMedicines';
+      String uri = '${globals.baseUrl}/admins/allRequestedMedicines';
       var response = (await http1.get(Uri.parse(uri)));
 
       if (response.statusCode == 200) {
@@ -182,7 +190,7 @@ class AdminApiCalling {
     try {
       // response = await Dio()
       //     .get('http://192.168.170.35/WebAPIDemo/api/users/allusers');
-      String uri = '$baseUrl/admins/allDonatedMedicines';
+      String uri = '${globals.baseUrl}/admins/allDonatedMedicines';
       var response = (await http1.get(Uri.parse(uri)));
 
       if (response.statusCode == 200) {
@@ -202,7 +210,7 @@ class AdminApiCalling {
     try {
       // response = await Dio()
       //     .get('http://192.168.170.35/WebAPIDemo/api/users/allusers');
-      String uri = '$baseUrl/admins/allAvailableMedicines';
+      String uri = '${globals.baseUrl}/admins/allAvailableMedicines';
       var response = (await http1.get(Uri.parse(uri)));
 
       if (response.statusCode == 200) {
@@ -219,7 +227,7 @@ class AdminApiCalling {
 
   Future getAllUsers() async {
     try {
-      String uri = '$baseUrl/admins/allUsers';
+      String uri = '${globals.baseUrl}/admins/allUsers';
       var response = (await http1.get(Uri.parse(uri)));
 
       if (response.statusCode == 200) {
@@ -236,7 +244,7 @@ class AdminApiCalling {
 
   Future addCollector(name, email, password) async {
     try {
-      String uri = '$baseUrl/admins/addCollector';
+      String uri = '${globals.baseUrl}/admins/addCollector';
       var response = await http1.post(
         Uri.parse(uri),
         headers: <String, String>{
@@ -252,9 +260,96 @@ class AdminApiCalling {
       print(response.body);
       if (response.statusCode == 200) {
         print('inserted');
+
         Get.to(() => AdminOverview());
       } else
         print('insertion failed');
+      print(response.body);
+    } on Exception catch (e) {
+      print(e);
+    }
+  }
+
+  Future getStockMedicine() async {
+    try {
+      String uri = '${globals.baseUrl}/admins/allMedicineStock';
+      var response = (await http1.get(Uri.parse(uri)));
+
+      if (response.statusCode == 200) {
+        Get.find<MedicineStockController>().allMedicineStock(response);
+        //return allRequestsController.allRequests;
+      } else {
+        print('There is some problem status code not 200');
+        print(response.body);
+        Get.to(() => AdminOverview());
+      }
+    } on Exception catch (e) {
+      print(e);
+    }
+  }
+
+  Future getWishlist() async {
+    try {
+      String uri = '${globals.baseUrl}/admins/wishlistItems';
+      var response = (await http1.get(Uri.parse(uri)));
+
+      if (response.statusCode == 200) {
+        Get.find<WishlistController>().allItems(response);
+        //return allRequestsController.allRequests;
+      } else {
+        print('There is some problem status code not 200');
+        print(response.body);
+        Get.to(() => AdminOverview());
+      }
+    } on Exception catch (e) {
+      print(e);
+    }
+  }
+
+  Future getBlockedUsers() async {
+    try {
+      String uri = '${globals.baseUrl}/admins/getBlockedUsers';
+      var response = (await http1.get(Uri.parse(uri)));
+
+      if (response.statusCode == 200) {
+        print("Operation successful");
+        print(response.body);
+        Get.find<AllUsersController>().allRegisteredUsers(response);
+      } else {
+        print('Operation unsuccessful');
+      }
+    } on Exception catch (e) {
+      print(e);
+    }
+  }
+
+  Future blockUnblockUser(id) async {
+    try {
+      String uri = '${globals.baseUrl}/admins/blockUnblockUser?id=$id';
+      var response = (await http1.get(Uri.parse(uri)));
+
+      if (response.statusCode == 200) {
+        print("Operation successful");
+      } else {
+        print('Operation unsuccessful');
+      }
+    } on Exception catch (e) {
+      print(e);
+    }
+  }
+
+  Future getPharmacies() async {
+    try {
+      String uri = '${globals.baseUrl}/admins/getPharmacyList';
+      var response = (await http1.get(Uri.parse(uri)));
+
+      if (response.statusCode == 200) {
+        print("Operation successful");
+        Get.find<PharmacyController>().allPharmacies(response);
+      } else {
+        print('Operation unsuccessful');
+        print(response.body);
+      }
     } on Exception catch (e) {
       print(e);
     }

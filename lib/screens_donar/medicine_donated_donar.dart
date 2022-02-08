@@ -1,111 +1,49 @@
 import 'package:flutter/material.dart';
+import 'package:fyp_real/controller/donar_controller/donated_med_controller.dart';
+import 'package:fyp_real/controller/donar_controller/member_api_calling.dart';
+import 'package:get/get.dart';
 
-class MedicineDonateDonar extends StatefulWidget {
+class MedicineDonatedDonar extends StatefulWidget {
   @override
-  State<MedicineDonateDonar> createState() => _MedicineDonateDonarState();
+  State<MedicineDonatedDonar> createState() => _MedicineDonatedDonarState();
 }
 
-class _MedicineDonateDonarState extends State<MedicineDonateDonar> {
-  bool value = false;
+class _MedicineDonatedDonarState extends State<MedicineDonatedDonar> {
+  var donated;
+  late DonatedMedController allDonatedCtrl;
   @override
+  void initState() {
+    allDonatedCtrl = Get.put(DonatedMedController());
+    MemberApiCalling().getDonatedMeds();
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('All Donated Medicines'),
-        centerTitle: true,
       ),
-      body: Column(
-        children: [
-          Card(
-            elevation: 5,
-            child: ListTile(
-              leading: Checkbox(
-                value: this.value,
-                onChanged: (bool? value) {
-                  setState(() {
-                    this.value = value!;
-                  });
-                },
-              ),
-              title: Text('Donated To: De-Watson'),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // SizedBox(
-                  //   height: 15,
-                  // ),
+      body: Obx(
+        () => ListView.builder(
+          itemBuilder: (context, index) {
+            donated = allDonatedCtrl.medicines[index];
 
-                  Text('Quantity: 6'),
-                ],
-              ),
-            ),
-          ),
-          Card(
-            elevation: 5,
-            child: ListTile(
-              leading: Checkbox(
-                value: this.value,
-                onChanged: (bool? value) {
-                  setState(() {
-                    this.value = value!;
-                  });
-                },
-              ),
-              title: Text('Donated To: Edhi'),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // SizedBox(
-                  //   height: 15,
-                  // ),
-                  Text('Quantity: 76'),
-                ],
-              ),
-            ),
-          ),
-          Card(
-            elevation: 5,
-            child: ListTile(
-              leading: Checkbox(
-                value: this.value,
-                onChanged: (bool? value) {
-                  setState(() {
-                    this.value = value!;
-                  });
-                },
-              ),
-              title: Text('Donated To: Ahmad'),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // SizedBox(
-                  //   height: 15,
-                  // ),
-                  Text('Quantity: 18'),
-                ],
-              ),
-            ),
-          ),
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height / 3,
-            child: Stack(
-              children: [
-                Positioned(
-                  top: 15,
-                  right: 20,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: Text(
-                      'Remove',
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  ),
+            return Card(
+              elevation: 5,
+              child: ListTile(
+                leading: Icon(Icons.medical_services),
+                title: Text(donated.name),
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Quantity: ${donated.quantity}'),
+                  ],
                 ),
-              ],
-            ),
-          )
-        ],
+              ),
+            );
+          },
+          itemCount: allDonatedCtrl.medicines.length,
+        ),
       ),
     );
   }
