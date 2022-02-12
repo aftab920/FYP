@@ -142,32 +142,33 @@ class NgoApiCalling {
   //   }
   // }
 
-  Future addDonatedMedicineStock(id, quantity) async {
-    try {
-      String uri = '${globals.baseUrl}/NGO/addDonatedMedicineStock';
+//// check ////////
+  // Future addDonatedMedicineStock(id, quantity) async {
+  //   try {
+  //     String uri = '${globals.baseUrl}/NGO/addDonatedMedicineStock';
 
-      var response = await http1.post(
-        Uri.parse(uri),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8'
-        },
-        body: jsonEncode(<String, dynamic>{
-          "whStockId": id,
-          "quantity": quantity,
-        }),
-      );
+  //     var response = await http1.post(
+  //       Uri.parse(uri),
+  //       headers: <String, String>{
+  //         'Content-Type': 'application/json; charset=UTF-8'
+  //       },
+  //       body: jsonEncode(<String, dynamic>{
+  //         "whStockId": id,
+  //         "quantity": quantity,
+  //       }),
+  //     );
 
-      print(response.body);
-      if (response.statusCode == 200) {
-        print('inserted into Donated Medicine Stock');
-      } else {
-        print('insertion failed into Donated Medicine Stock');
-        Get.to(() => NGOOverview());
-      }
-    } on Exception catch (e) {
-      print(e);
-    }
-  }
+  //     print(response.body);
+  //     if (response.statusCode == 200) {
+  //       print('inserted into Donated Medicine Stock');
+  //     } else {
+  //       print('insertion failed into Donated Medicine Stock');
+  //       Get.to(() => NGOOverview());
+  //     }
+  //   } on Exception catch (e) {
+  //     print(e);
+  //   }
+  // }
 
   Future addMedicineStock(name, quantity, type, expiryDate) async {
     try {
@@ -197,8 +198,8 @@ class NgoApiCalling {
     }
   }
 
-  Future donateToHealthUnit(ngoId, medName, totalQuantity, medType, medExpiry,
-      healthUnitId, donateQuantity) async {
+  Future donateToHealthUnit(ngoId, medName, medType, stockId, huStockId,
+      healthUnitId, donateQuantity, availQty) async {
     try {
       String uri = '${globals.baseUrl}/ngo/donateToHealthUnit';
       var response = await http1.post(
@@ -208,18 +209,23 @@ class NgoApiCalling {
         },
         body: jsonEncode(<String, dynamic>{
           "ngoid": ngoId.toString(),
-          "medName": medName.toString(),
-          "totalQuantity": totalQuantity.toString(),
-          "medType": medType.toString(),
-          "medExpiry": medExpiry.toString(),
-          // "medid": medId.toString(),
+          // "medName": medName.toString(),
+          // "medType": medType.toString(),
+          "Ngostockid": stockId.toString(),
+          "HU_Stockid": huStockId.toString(),
           "healthUnitId": healthUnitId.toString(),
           "donateQuantity": donateQuantity.toString(),
+          "AvailableQty": availQty.toString(),
         }),
       );
       print(response.body);
+      var data = jsonDecode(response.body);
+      print(data[0]);
+      // print(data[1]);
       if (response.statusCode == 200) {
-        Get.to(() => NGOOverview());
+        if (data[0] == "1" || data[0] == 1 || data[0] == "1") {
+          NgoApiCalling().confirmMedicine(huStockId);
+        }
       } else {
         print('Donation failed to Health Unit');
         Get.to(() => NGOOverview());
@@ -321,6 +327,28 @@ class NgoApiCalling {
       if (response.statusCode == 200) {
         print('Successfull');
         Get.find<MedicineRequestsController>().allMedicineRequests(response);
+      } else {
+        print('Failed');
+        Get.to(NGOOverview());
+      }
+    } on Exception catch (e) {
+      print(e);
+    }
+  }
+
+  Future confirmMedicine(huStockid) async {
+    try {
+      String uri = '${globals.baseUrl}/ngo/confirmMed?hustock_id=$huStockid';
+
+      var response = await http1.get(
+        Uri.parse(uri),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+      );
+      print(response.body);
+      if (response.statusCode == 200) {
+        print('Successfull');
       } else {
         print('Failed');
         Get.to(NGOOverview());

@@ -13,7 +13,6 @@ MedicineRequestsModel _$MedicineRequestsModelFromJson(
       ..name = json['Medname'] as String
       ..quantity = json['Requestedqty'] as int
       ..type = json['Medtype'] as String
-      ..expiry = DateTime.parse(json['Medexpiry'] as String)
       ..huid = json['Healthunitid'] as int;
 
 Map<String, dynamic> _$MedicineRequestsModelToJson(
@@ -23,6 +22,5 @@ Map<String, dynamic> _$MedicineRequestsModelToJson(
       'Medname': instance.name,
       'Requestedqty': instance.quantity,
       'Medtype': instance.type,
-      'Medexpiry': instance.expiry.toIso8601String(),
       'Healthunitid': instance.huid,
     };

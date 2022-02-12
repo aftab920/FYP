@@ -1,17 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
+import 'package:fyp_real/controller/pharmacy_controller/pharmacy_api_calling.dart';
+import 'package:fyp_real/controller/pharmacy_controller/pharmacy_cash_controller.dart';
 import 'package:fyp_real/screens/auth_screen.dart';
 import 'package:fyp_real/screens/main_functions_item.dart';
 import 'package:fyp_real/screens/screens_pharmacy/donation_requests_by_donor.dart';
 import 'package:fyp_real/screens/screens_pharmacy/medicine_requests_by_admin.dart';
 import 'package:fyp_real/screens/screens_pharmacy/pharmacy_donated.dart';
 import 'package:fyp_real/screens/screens_pharmacy/pharmacy_profile_edit.dart';
+import 'package:fyp_real/screens/screens_pharmacy/view_cash.dart';
 import 'package:fyp_real/widgets/widgets_pharmacy/pharmacy_home_feature.dart';
 import 'package:fyp_real/widgets/widgets_pharmacy/pharmacy_medicine_request.dart';
 
 import 'package:get/get.dart';
 
-class PharmacyOverview extends StatelessWidget {
+class PharmacyOverview extends StatefulWidget {
+  @override
+  State<PharmacyOverview> createState() => _PharmacyOverviewState();
+}
+
+class _PharmacyOverviewState extends State<PharmacyOverview> {
+  // late int availableCash;
+  // late PharmacyCashController cashCtrl;
+
+  @override
+  void initState() {
+    //   cashCtrl = Get.put(PharmacyCashController());
+    //PharmacyApiCalling().getCash();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,6 +86,16 @@ class PharmacyOverview extends StatelessWidget {
       ),
       appBar: AppBar(
         title: const Text('Pharmacy Mode'),
+        // actions: [
+        //   Container(
+        //     margin: EdgeInsets.only(top: 15, right: 20),
+        //     child: Text(
+        //       '\$${availableCash = cashCtrl.cash.value}',
+        //       textAlign: TextAlign.center,
+        //       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        //     ),
+        //   ),
+        // ],
         centerTitle: true,
       ),
       body: SafeArea(
@@ -121,6 +149,9 @@ class PharmacyOverview extends StatelessWidget {
                     }
                     if (overviewFunctions.id == 'a4') {
                       Get.to(() => PharmacyDonated());
+                    }
+                    if (overviewFunctions.id == 'a5') {
+                      Get.to(() => ViewCash());
                     }
                   },
                   child: MainFunctionsItem(

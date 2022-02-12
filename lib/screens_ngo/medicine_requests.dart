@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fyp_real/controller/ngo_controller/medicine_requests_controller.dart';
 import 'package:fyp_real/controller/ngo_controller/ngo_api_calling.dart';
+import 'package:fyp_real/screens_ngo/donate_requested_med.dart';
 import 'package:get/get.dart';
 
 class MedicineRequests extends StatefulWidget {
@@ -32,11 +33,13 @@ class _MedicineRequestsState extends State<MedicineRequests> {
             return Card(
               elevation: 5,
               child: ListTile(
-                  title: Text(medReq.Medname),
+                  title: Text(medReq.name),
                   subtitle: Column(
                     children: [
                       Text('Type: ${medReq.type}'),
                       Text('Required Quantuty: ${medReq.quantity}'),
+                      Text('Huid: ${medReq.huid}'),
+                      Text('StockId: ${medReq.stockid}'),
                     ],
                   ),
                   trailing: Row(
@@ -48,12 +51,10 @@ class _MedicineRequestsState extends State<MedicineRequests> {
                         onPressed: () {
                           var healthunitstockId =
                               allReqCtrl.allRequests[index].stockid;
-                          NgoApiCalling().acceptMedRequest(
-                              healthunitstockId,
-                              allReqCtrl.allRequests[index].name,
-                              allReqCtrl.allRequests[index].quantity,
-                              allReqCtrl.allRequests[index].type,
-                              allReqCtrl.allRequests[index].huid);
+                          Get.to(
+                            DonateRequestedMed(),
+                            arguments: [medReq.huid, medReq.stockid],
+                          );
                         },
                         style: ElevatedButton.styleFrom(primary: Colors.green),
                       ),

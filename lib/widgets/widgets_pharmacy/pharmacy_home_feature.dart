@@ -23,4 +23,9 @@ final pharmacyHomeFeature = [
     'All Donation               ',
     Icon(Icons.inventory_outlined),
   ),
+  Home(
+    'a5',
+    'View Cash               ',
+    Icon(Icons.inventory_outlined),
+  ),
 ];

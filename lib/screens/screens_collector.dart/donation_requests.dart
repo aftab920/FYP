@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fyp_real/controller/collector_controller/collector_api_calling.dart';
 import 'package:fyp_real/controller/collector_controller/collector_donation_requests_controller.dart';
+import 'package:fyp_real/screens/screens_collector.dart/pharmacy_donation_manage.dart';
 import 'package:fyp_real/widgets/widgets_collector/add_medicine_form.dart';
 import 'package:get/get.dart';
 import '../../controller/variables.dart' as globals;
@@ -19,6 +20,7 @@ class _DonationRequestsState extends State<DonationRequests> {
     showModalBottomSheet(
       context: ctx,
       builder: (_) {
+        //return WillPopScope(child: child, onWillPop: onWillPop)
         return GestureDetector(
           onTap: () {},
           child: AddMedicineForm(id),
@@ -64,7 +66,9 @@ class _DonationRequestsState extends State<DonationRequests> {
                         onPressed: () {
                           globals.donorId = allReqCtrl.allRequests[index].id;
                           CollectorApiCalling().acceptDonation(globals.donorId);
-                          _addMedicine(context, globals.donorId);
+                          //CollectorApiCalling().getUserType();
+                          //_addMedicine(context, globals.donorId);
+                          Get.to(() => PharmacyDonationManage());
                         },
                         style: ElevatedButton.styleFrom(primary: Colors.green),
                       ),

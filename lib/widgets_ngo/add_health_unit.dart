@@ -14,7 +14,7 @@ class AddHealthUnit extends StatelessWidget {
   final healthUnitTypeController = Get.put(HealthUnitTypeContoller());
   HealthUnitTypeContoller inst = Get.find<HealthUnitTypeContoller>();
 
-  static final GlobalKey<FormState> _formKey = GlobalKey();
+  GlobalKey<FormState> _formKey = GlobalKey();
 
   void _submitData() {
     if (!_formKey.currentState!.validate()) {

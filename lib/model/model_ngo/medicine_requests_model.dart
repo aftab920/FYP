@@ -17,8 +17,8 @@ class MedicineRequestsModel {
   @JsonKey(name: "Medtype")
   late String type;
 
-  @JsonKey(name: "Medexpiry")
-  late DateTime expiry;
+  // @JsonKey(name: "Medexpiry")
+  // late DateTime expiry;
 
   @JsonKey(name: "Healthunitid")
   late int huid;
@@ -35,6 +35,6 @@ class MedicineRequestsModel {
     quantity = mp['Requestedqty'];
     type = mp['Medtype'];
     huid = mp['Healthunitid'];
-    expiry = mp['Medexpiry'];
+    //expiry = mp['Medexpiry'];
   }
 }

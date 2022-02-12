@@ -29,9 +29,9 @@ final homeFeature = [
     'Donated Medicine            ',
     Icon(Icons.inventory_outlined),
   ),
-  Home(
-    'a7',
-    'Blocked Users              ',
-    Icon(Icons.block_flipped),
-  ),
+  // Home(
+  //   'a7',
+  //   'Blocked Users              ',
+  //   Icon(Icons.block_flipped),
+  // ),
 ];

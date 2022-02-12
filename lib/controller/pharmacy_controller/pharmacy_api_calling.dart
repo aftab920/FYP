@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'package:fyp_real/controller/pharmacy_controller/cash_controller.dart';
 import 'package:fyp_real/controller/pharmacy_controller/donation_requests_controller.dart';
 import 'package:fyp_real/controller/pharmacy_controller/medicine_requests_controller.dart';
+import 'package:fyp_real/controller/pharmacy_controller/pharmacy_cash_controller.dart';
 import 'package:fyp_real/controller/pharmacy_controller/pharmacy_donated_controller.dart';
 import 'package:fyp_real/screens/auth_screen.dart';
 import 'package:fyp_real/screens/screens_pharmacy/pharmacy_overview.dart';
@@ -199,6 +201,36 @@ class PharmacyApiCalling {
       }
     } on Exception catch (e) {
       print(e);
+    }
+  }
+
+  Future<List> getCash() async {
+    try {
+      String uri = '${globals.baseUrl}/pharmacy/getCash?id=${globals.id}';
+
+      var response = await http1.get(
+        Uri.parse(uri),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+      );
+      print(response.body);
+      var data = jsonDecode(response.body);
+      if (response.statusCode == 200) {
+        print('Successfull');
+        print(data[0]);
+        print(data[1]);
+        return data;
+        //Get.find<CashController>().cashRecord(response);
+      } else {
+        print('Failed');
+        Get.to(() => PharmacyOverview());
+        return data;
+      }
+    } on Exception catch (e) {
+      print(e);
+      var data;
+      return data;
     }
   }
 }

@@ -27,6 +27,8 @@ class HealthUnitOverview extends StatelessWidget {
     return Scaffold(
       drawer: Drawer(
         child: ListView(
+          scrollDirection: Axis.vertical,
+          shrinkWrap: true,
           padding: EdgeInsets.zero,
           children: [
             DrawerHeader(
@@ -106,7 +108,7 @@ class HealthUnitOverview extends StatelessWidget {
                         _requestMedicine(context);
                       }
                       if (overviewFunctions.id == 'a2') {
-                        //Get.to(() => MedRequestsStatus);
+                        Get.to(() => MedRequestsStatus());
                       }
                     },
                     child: MainFunctionsItem(

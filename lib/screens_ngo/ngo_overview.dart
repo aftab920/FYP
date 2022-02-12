@@ -5,7 +5,7 @@ import 'package:fyp_real/screens/auth_screen.dart';
 import 'package:fyp_real/screens/main_functions_item.dart';
 import 'package:fyp_real/screens_admin/donated_medicines.dart';
 import 'package:fyp_real/screens_ngo/all_donated.dart';
-import 'package:fyp_real/screens_ngo/donate_medicine_ngo.dart';
+import 'package:fyp_real/screens_ngo/view_stock.dart';
 import 'package:fyp_real/screens_ngo/health_unit.dart';
 import 'package:fyp_real/screens_ngo/medicine_requests.dart';
 import 'package:fyp_real/screens_ngo/ngo_profile_edit.dart';
@@ -138,7 +138,7 @@ class NGOOverview extends StatelessWidget {
                         _requestMedicine(context);
                       }
                       if (overviewFunctions.id == 'a2') {
-                        Get.to(() => DonateMedicineNgo());
+                        Get.to(() => ViewStock());
                       }
                       if (overviewFunctions.id == 'a3') {
                         Get.to(() => HealthUnit());

@@ -11,7 +11,7 @@ final ngoHomeFeature = [
   ),
   Home(
     'a2',
-    'Donate Medicine               ',
+    'View Stock               ',
     Icon(Icons.inventory_outlined),
   ),
   Home(

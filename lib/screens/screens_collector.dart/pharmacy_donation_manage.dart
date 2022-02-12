@@ -2,27 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:fyp_real/controller/collector_controller/collector_api_calling.dart';
 import 'package:fyp_real/controller/date_time_picker.dart';
 import 'package:fyp_real/controller/dose_type.dart';
+import 'package:fyp_real/screens/screens_collector.dart/collector_overview.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import '../../controller/variables.dart' as globals;
 
 final _titleController = TextEditingController();
 final _quantityController = TextEditingController();
 
-// ignore: must_be_immutable
-class AddMedicineForm extends StatefulWidget {
-  var dId;
-  late int collectorId;
-  AddMedicineForm(id) {
-    dId = id;
-    collectorId = globals.id;
-  }
-
+class PharmacyDonationManage extends StatefulWidget {
   @override
-  State<AddMedicineForm> createState() => _AddMedicineFormState();
+  State<PharmacyDonationManage> createState() => _PharmacyDonationManageState();
 }
 
-class _AddMedicineFormState extends State<AddMedicineForm> {
+class _PharmacyDonationManageState extends State<PharmacyDonationManage> {
   DateTimePicker dateController = Get.put(DateTimePicker());
   final doseTypeController = Get.put(DoseType());
   DoseType inst = Get.find<DoseType>();
@@ -40,28 +32,18 @@ class _AddMedicineFormState extends State<AddMedicineForm> {
       _quantityController.text,
       doseTypeController.dropdownValue.value,
       dateController.selectedDate.toString(),
-      widget.collectorId,
-      widget.dId,
+      globals.id,
+      globals.donorId,
     );
-    Get.snackbar('Successful', 'Requested successfully!');
-
-    // if (_quantityController.text.isEmpty) {
-    //   return;
-    // }
-    // final enteredTitle = _titleController.text;
-    // final enteredQuantity = double.parse(_quantityController.text);
-
-    // if (enteredTitle.isEmpty ||
-    //     enteredQuantity <= 0 ||
-    //     dateController.selectedDate == null) {
-    //   return;
-    // }
   }
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Card(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Input Medicines from Pharmacy'),
+      ),
+      body: Card(
         elevation: 5,
         child: Container(
           padding: EdgeInsets.only(
@@ -167,6 +149,10 @@ class _AddMedicineFormState extends State<AddMedicineForm> {
                   ),
                   onPressed: _submitData,
                 ),
+                ElevatedButton(
+                  child: Text('Done'),
+                  onPressed: () => Get.to(() => CollectorOverview()),
+                )
               ],
             ),
           ),
