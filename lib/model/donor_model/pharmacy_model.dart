@@ -26,6 +26,6 @@ class PharmacyModel {
     id = mp['Userid'];
     name = mp['Name'];
     address = mp['Address'];
-    // cash = mp['AvailableCash'];
+    //cash = mp['AvailableCash'];
   }
 }

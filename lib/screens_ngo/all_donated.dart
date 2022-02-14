@@ -47,7 +47,7 @@ class _AllDonatedState extends State<AllDonated> {
                             Text('Address: ${meds.address}'),
                             Text('Donated quantity: ${meds.quantity}'),
                             Text('Type: ${meds.type}'),
-                            // Text('Expiry: ${meds.expiry}')
+                            Text('Expiry: ${DateTime.parse(meds.expiry)}')
                           ],
                         ),
                       ),

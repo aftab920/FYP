@@ -42,8 +42,8 @@ class InputDonatedAmount extends StatelessWidget {
         child: Container(
           padding: EdgeInsets.only(
             top: 10,
-            left: 120,
-            right: 100,
+            left: 50,
+            right: 50,
             bottom: MediaQuery.of(context).viewInsets.bottom + 10,
           ),
           child: Column(

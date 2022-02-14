@@ -61,9 +61,12 @@ class PharmacyApiCalling {
       print(response.body);
       if (response.statusCode == 200) {
         print('Called the collector');
+        Get.snackbar("Successfull", "Called the Collector");
         Get.to(() => PharmacyOverview());
-      } else
+      } else {
+        Get.snackbar("Error", "Something went wrong");
         print('Collector calling failed');
+      }
     } on Exception catch (e) {
       print(e);
     }
@@ -113,6 +116,7 @@ class PharmacyApiCalling {
       print(response.body);
       if (response.statusCode == 200) {
         print('Successfull');
+        Get.snackbar("Successfull", "Added to the funds");
       } else {
         print('Failed');
         Get.to(() => PharmacyOverview());
@@ -139,7 +143,7 @@ class PharmacyApiCalling {
             .allMedicineRequests(response);
       } else {
         print('Failed');
-        Get.to(PharmacyOverview());
+        Get.to(() => PharmacyOverview());
       }
     } on Exception catch (e) {
       print(e);
@@ -158,14 +162,14 @@ class PharmacyApiCalling {
         },
         body: jsonEncode(
           <String, String>{
-            "pharmacyid": loginPharmacyId,
-            "wishlistid": wishlistId,
-            "ngoid": ngoId,
-            "quantity": quantity,
-            "type": type,
-            "medname": medName,
-            "amountdonated": amountDonated,
-            "expirydate": expiryDate,
+            "pharmacyid": loginPharmacyId.toString(),
+            "wishlistid": wishlistId.toString(),
+            "ngoid": ngoId.toString(),
+            "quantity": quantity.toString(),
+            "type": type.toString(),
+            "medname": medName.toString(),
+            "amountdonated": amountDonated.toString(),
+            "expirydate": expiryDate.toString(),
           },
         ),
       );
@@ -173,6 +177,7 @@ class PharmacyApiCalling {
       print(response.body);
       if (response.statusCode == 200) {
         print('Donated To admin');
+        Get.snackbar("Successfull", "Donated Successfully");
         Get.to(() => PharmacyOverview());
       } else
         print('Donation To admin failed');
@@ -183,7 +188,8 @@ class PharmacyApiCalling {
 
   Future allDonatedMeds() async {
     try {
-      String uri = '${globals.baseUrl}/pharmacy/alldonated?id=${globals.id}';
+      String uri =
+          '${globals.baseUrl}/pharmacy/seedonatedmedicines?id=${globals.id}';
 
       var response = await http1.get(
         Uri.parse(uri),

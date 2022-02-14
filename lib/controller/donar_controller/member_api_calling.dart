@@ -60,9 +60,12 @@ class MemberApiCalling {
       print(response.body);
       if (response.statusCode == 200) {
         print('Called the collector');
+        Get.snackbar("Successfull", "Our collector will reach out to you soon");
         Get.to(() => MemberOverview());
-      } else
+      } else {
+        Get.snackbar("Alert!", "Only Request once at a time.");
         print('Collector calling failed');
+      }
     } on Exception catch (e) {
       print(e);
     }
@@ -104,9 +107,12 @@ class MemberApiCalling {
       print(response.body);
       if (response.statusCode == 200) {
         print('inserted');
+        Get.snackbar("Successfull",
+            "Funds Donated, Waiting for the pharmacy to confirm!");
         // Get.to(() => AuthScreen());
       } else
         print('insertion failed');
+      Get.snackbar("Error", "Error Adding Funds");
     } on Exception catch (e) {
       print(e);
     }

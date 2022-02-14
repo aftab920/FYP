@@ -43,6 +43,7 @@ class _DonatedMedicinesState extends State<DonatedMedicines> {
                     // ),
                     Text('Donated To: ${medDon.name}'),
                     Text('Quantity: ${medDon.quantity}'),
+                    Text('Expiry: ${DateTime.parse(medDon.expiry)}'),
                     //Text('Date: ${medDon.date}'),
                   ],
                 ),

@@ -11,10 +11,12 @@ PharmacyModel _$PharmacyModelFromJson(Map<String, dynamic> json) =>
       ..id = json['Userid'] as int
       ..name = json['Name'] as String
       ..address = json['Address'] as String;
+//  ..cash = json['AvailableCash'] as int;
 
 Map<String, dynamic> _$PharmacyModelToJson(PharmacyModel instance) =>
     <String, dynamic>{
       'Userid': instance.id,
       'Name': instance.name,
       'Address': instance.address,
+      //  'AvailableCash': instance.cash,
     };

@@ -4,7 +4,8 @@ import 'package:fyp_real/screens/auth_screen.dart';
 import 'package:fyp_real/screens/main_functions_item.dart';
 import 'package:fyp_real/screens_admin/add_user.dart';
 import 'package:fyp_real/screens_admin/all_users.dart';
-import 'package:fyp_real/screens_admin/available_medicines.dart';
+import 'package:fyp_real/screens_admin/available_meds.dart';
+import 'package:fyp_real/screens_admin/total_stock.dart';
 import 'package:fyp_real/screens_admin/blocked_users.dart';
 import 'package:fyp_real/screens_admin/donated_medicines.dart';
 import 'package:fyp_real/screens_admin/medicine_requests.dart';
@@ -145,7 +146,7 @@ class AdminOverview extends StatelessWidget {
                       _addUser(context);
                     }
                     if (overviewFunctions.id == 'a4') {
-                      Get.to(() => AvailableMedicines());
+                      Get.to(() => TotalStock());
                     }
                     if (overviewFunctions.id == 'a5') {
                       Get.to(() => Wishlist());
@@ -155,6 +156,9 @@ class AdminOverview extends StatelessWidget {
                     }
                     if (overviewFunctions.id == 'a7') {
                       Get.to(() => BlockedUsers());
+                    }
+                    if (overviewFunctions.id == 'a8') {
+                      Get.to(() => AvailableMeds());
                     }
                   },
                   child: MainFunctionsItem(

@@ -105,7 +105,7 @@ class AddUser extends StatelessWidget {
                 //   ),
                 // ),
                 ElevatedButton(
-                    child: Text('Post Request'),
+                    child: Text('Add Now'),
                     // style: ElevatedButton.styleFrom(
                     //   primary: Theme.of(context).textTheme.button!.color,
                     //   //onPrimary: Theme.of(context).textTheme.bodyText1,

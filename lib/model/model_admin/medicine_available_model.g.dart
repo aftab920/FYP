@@ -9,16 +9,16 @@ part of 'medicine_available_model.dart';
 MedicineAvailableModel _$MedicineAvailableModelFromJson(
         Map<String, dynamic> json) =>
     MedicineAvailableModel()
-      ..id = json['Id'] as int
-      ..name = json['Name'] as String
-      ..date = json['Expiry_Date'] as String
+      ..id = json['Whstockid'] as int
+      ..name = json['Medname'] as String
+      ..date = json['Medname'] as String
       ..quantity = json['Quantity'] as int;
 
 Map<String, dynamic> _$MedicineAvailableModelToJson(
         MedicineAvailableModel instance) =>
     <String, dynamic>{
-      'Id': instance.id,
-      'Name': instance.name,
-      'Expiry_Date': instance.date,
+      'Whstockid': instance.id,
+      'Medname': instance.name,
+      'Expiry': instance.date,
       'Quantity': instance.quantity,
     };

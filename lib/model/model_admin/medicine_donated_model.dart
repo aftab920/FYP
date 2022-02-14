@@ -14,6 +14,9 @@ class MedicineDonatedModel {
   @JsonKey(name: "quantity")
   late int quantity;
 
+  @JsonKey(name: "Expiry")
+  late String expiry;
+
   MedicineDonatedModel();
 
   factory MedicineDonatedModel.fromJson(Map<String, dynamic> json) =>
@@ -24,5 +27,6 @@ class MedicineDonatedModel {
     name = mp['Name'];
     medName = mp['Medname'];
     quantity = mp['quantity'];
+    expiry = mp['Expiry'];
   }
 }

@@ -37,6 +37,7 @@ class _MedicineDonatedDonarState extends State<MedicineDonatedDonar> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text('Quantity: ${donated.quantity}'),
+                    Text('Expiry: ${DateTime.parse(donated.expiry)}'),
                   ],
                 ),
               ),

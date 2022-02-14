@@ -9,18 +9,16 @@ part of 'pharmacy_donated_model.dart';
 PharmacyDonatedModel _$PharmacyDonatedModelFromJson(
         Map<String, dynamic> json) =>
     PharmacyDonatedModel()
-      ..id = json['Wishlist_id'] as int
       ..name = json['Medname'] as String
       ..type = json['Type'] as String
-      ..amount = json['Med_amount'] as int
+      ..expiry = json['Expiry'] as String
       ..quantity = json['Quantity'] as int;
 
 Map<String, dynamic> _$PharmacyDonatedModelToJson(
         PharmacyDonatedModel instance) =>
     <String, dynamic>{
-      'Wishlist_id': instance.id,
       'Medname': instance.name,
       'Type': instance.type,
-      'Med_amount': instance.amount,
+      'Expiry': instance.expiry,
       'Quantity': instance.quantity,
     };

@@ -4,8 +4,8 @@ part 'pharmacy_donated_model.g.dart';
 
 @JsonSerializable()
 class PharmacyDonatedModel {
-  @JsonKey(name: "Wishlist_id")
-  late int id;
+  // @JsonKey(name: "Wishlist_id")
+  // late int id;
 
   @JsonKey(name: "Medname")
   late String name;
@@ -13,8 +13,8 @@ class PharmacyDonatedModel {
   @JsonKey(name: "Type")
   late String type;
 
-  @JsonKey(name: "Med_amount")
-  late int amount;
+  @JsonKey(name: "Expiry")
+  late String expiry;
 
   @JsonKey(name: "Quantity")
   late int quantity;
@@ -26,10 +26,10 @@ class PharmacyDonatedModel {
   Map<String, dynamic> toJson() => _$PharmacyDonatedModelToJson(this);
 
   PharmacyDonatedModel.fromMap(Map<String, dynamic> mp) {
-    id = mp['Wishlist_id'];
+    // id = mp['Wishlist_id'];
     name = mp['Medname'];
     type = mp['Type'];
-    amount = mp['Med_amount'];
+    expiry = mp['Expiry'];
     quantity = mp['Quantity'];
   }
 }

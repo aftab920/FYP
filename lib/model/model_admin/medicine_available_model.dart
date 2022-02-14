@@ -4,13 +4,13 @@ part 'medicine_available_model.g.dart';
 
 @JsonSerializable()
 class MedicineAvailableModel {
-  @JsonKey(name: "Id")
+  @JsonKey(name: "Whstockid")
   late int id;
 
-  @JsonKey(name: "Name")
+  @JsonKey(name: "Medname")
   late String name;
 
-  @JsonKey(name: "Expiry_Date")
+  @JsonKey(name: "Expiry")
   late String date;
 
   @JsonKey(name: "Quantity")
@@ -23,9 +23,9 @@ class MedicineAvailableModel {
   Map<String, dynamic> toJson() => _$MedicineAvailableModelToJson(this);
 
   MedicineAvailableModel.fromMap(Map<String, dynamic> mp) {
-    id = mp['Id'];
-    name = mp['Name'];
-    date = mp['Expiry_Date'];
+    id = mp['Whstockid'];
+    name = mp['Medname'];
+    date = mp['Expiry'];
     quantity = mp['Quantity'];
   }
 }

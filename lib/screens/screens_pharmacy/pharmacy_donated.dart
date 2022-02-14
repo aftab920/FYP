@@ -43,10 +43,10 @@ class _PharmacyDonatedState extends State<PharmacyDonated> {
                             // SizedBox(
                             //   height: 15,
                             // ),
-                            Text('Amount: ${meds.amount}'),
+                            //Text('Amount: ${meds.amount}'),
                             Text('Donated quantity: ${meds.quantity}'),
                             Text('Type: ${meds.type}'),
-                            // Text('Expiry: ${meds.expiry}')
+                            Text('Expiry: ${meds.expiry}')
                           ],
                         ),
                       ),

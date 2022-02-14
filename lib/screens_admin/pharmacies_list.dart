@@ -11,6 +11,7 @@ class PharmaciesList extends StatefulWidget {
 class _PharmaciesListState extends State<PharmaciesList> {
   var pharmacy;
   late PharmacyController pharmCtrl;
+  var wishlistID = Get.arguments;
 
   @override
   void initState() {
@@ -40,10 +41,17 @@ class _PharmaciesListState extends State<PharmaciesList> {
                     SizedBox(
                       height: 15,
                     ),
-                    //Text('Amount: ${pharmacy.cash}'),
+                    Text('Available Fund: ${pharmacy.cash}'),
                     Text('Address: ${pharmacy.address}'),
                   ],
                 ),
+                trailing: ElevatedButton(
+                    child: Text('Request'),
+                    onPressed: () {
+                      var pharmacyID = pharmCtrl.pharmacylist[index].id;
+                      AdminApiCalling()
+                          .openReqByAdmin(wishlistID[0], pharmacyID);
+                    }),
               ),
             );
           },

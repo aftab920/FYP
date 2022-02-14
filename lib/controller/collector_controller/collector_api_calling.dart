@@ -68,6 +68,29 @@ class CollectorApiCalling {
     }
   }
 
+  Future doneDonation() async {
+    try {
+      String uri =
+          '${globals.baseUrl}/collector/doneDonation?donorId=${globals.donorId}';
+
+      var response = await http1.get(
+        Uri.parse(uri),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+      );
+      print(response.body);
+      if (response.statusCode == 200) {
+        print('Successfull');
+        Get.snackbar("Successfull", "All Collected");
+        Get.to(() => CollectorOverview());
+      } else {
+        print('Failed');
+        Get.to(() => CollectorOverview());
+      }
+    } catch (e) {}
+  }
+
   Future acceptDonation(id) async {
     try {
       String uri = '${globals.baseUrl}/collector/acceptdonation?id=$id';

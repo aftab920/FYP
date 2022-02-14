@@ -260,10 +260,14 @@ class AdminApiCalling {
       print(response.body);
       if (response.statusCode == 200) {
         print('inserted');
+        Get.snackbar("Successful", "Added Collector");
 
         Get.to(() => AdminOverview());
-      } else
+      } else {
+        Get.snackbar("Failed", "Collector adding failed");
         print('insertion failed');
+      }
+
       print(response.body);
     } on Exception catch (e) {
       print(e);
@@ -348,6 +352,34 @@ class AdminApiCalling {
         Get.find<PharmacyController>().allPharmacies(response);
       } else {
         print('Operation unsuccessful');
+        print(response.body);
+      }
+    } on Exception catch (e) {
+      print(e);
+    }
+  }
+
+  Future openReqByAdmin(wishlistID, pharmacyID) async {
+    try {
+      String uri =
+          '${globals.baseUrl}/admins/openReqByAdmin?wishId=$wishlistID&pharmId=$pharmacyID';
+      var response = (await http1.post(
+        Uri.parse(uri),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: jsonEncode(<String, dynamic>{
+          "wishId": wishlistID,
+          "pharmId": pharmacyID,
+        }),
+      ));
+
+      if (response.statusCode == 200) {
+        print("Operation successful");
+        Get.snackbar('Successfull', "Successfully Requested");
+      } else {
+        print('Operation unsuccessful');
+        Get.snackbar('Error', "${response.body}");
         print(response.body);
       }
     } on Exception catch (e) {

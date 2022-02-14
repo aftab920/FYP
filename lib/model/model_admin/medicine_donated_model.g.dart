@@ -11,7 +11,8 @@ MedicineDonatedModel _$MedicineDonatedModelFromJson(
     MedicineDonatedModel()
       ..name = json['Name'] as String
       ..medName = json['Medname'] as String
-      ..quantity = json['quantity'] as int;
+      ..quantity = json['quantity'] as int
+      ..expiry = json['Expiry'] as String;
 
 Map<String, dynamic> _$MedicineDonatedModelToJson(
         MedicineDonatedModel instance) =>
@@ -19,4 +20,5 @@ Map<String, dynamic> _$MedicineDonatedModelToJson(
       'Name': instance.name,
       'Medname': instance.medName,
       'quantity': instance.quantity,
+      'Expiry': instance.expiry,
     };

@@ -16,8 +16,13 @@ final homeFeature = [
   ),
   Home(
     'a4',
-    'Available Stock          ',
+    'Total Stock          ',
     Icon(Icons.grading_outlined),
+  ),
+  Home(
+    'a8',
+    'Available Medicines         ',
+    Icon(Icons.post_add),
   ),
   Home(
     'a5',

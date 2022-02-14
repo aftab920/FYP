@@ -16,19 +16,19 @@ class _DonationRequestsState extends State<DonationRequests> {
   late CollectorDonationRequestsController allReqCtrl;
   // = Get.find<MedicineRequestsController>();
 
-  void _addMedicine(BuildContext ctx, id) {
-    showModalBottomSheet(
-      context: ctx,
-      builder: (_) {
-        //return WillPopScope(child: child, onWillPop: onWillPop)
-        return GestureDetector(
-          onTap: () {},
-          child: AddMedicineForm(id),
-          behavior: HitTestBehavior.opaque,
-        );
-      },
-    );
-  }
+  // void _addMedicine(BuildContext ctx, id) {
+  //   showModalBottomSheet(
+  //     context: ctx,
+  //     builder: (_) {
+  //       //return WillPopScope(child: child, onWillPop: onWillPop)
+  //       return GestureDetector(
+  //         onTap: () {},
+  //         child: AddMedicineForm(id),
+  //         behavior: HitTestBehavior.opaque,
+  //       );
+  //     },
+  //   );
+  // }
 
   @override
   void initState() {
@@ -65,7 +65,7 @@ class _DonationRequestsState extends State<DonationRequests> {
                         child: Text('✔'),
                         onPressed: () {
                           globals.donorId = allReqCtrl.allRequests[index].id;
-                          CollectorApiCalling().acceptDonation(globals.donorId);
+                          // CollectorApiCalling().acceptDonation(globals.donorId);
                           //CollectorApiCalling().getUserType();
                           //_addMedicine(context, globals.donorId);
                           Get.to(() => PharmacyDonationManage());

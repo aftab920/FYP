@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fyp_real/controller/pharmacy_controller/pharmacy_api_calling.dart';
-import 'package:get/get.dart';
 
 class ViewCash extends StatefulWidget {
   @override
@@ -30,7 +29,7 @@ class _ViewCashState extends State<ViewCash> {
                       padding: EdgeInsets.all(
                           MediaQuery.of(context).size.width * 0.1),
                       child: Text(
-                        'Total Donation Amount: ${snapshot.data[0]}',
+                        'Available Cash: ${snapshot.data[0]}',
                         style: TextStyle(
                             fontSize: 25, fontWeight: FontWeight.bold),
                         textAlign: TextAlign.center,
@@ -52,7 +51,7 @@ class _ViewCashState extends State<ViewCash> {
                     padding:
                         EdgeInsets.all(MediaQuery.of(context).size.width * 0.1),
                     child: Text(
-                      'Remaining Donation Amount: ${snapshot.data[1]}',
+                      'Donated Amount: ${snapshot.data[1]}',
                       style:
                           TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,

@@ -13,6 +13,9 @@ class WishlistModel {
   @JsonKey(name: "Type")
   late String type;
 
+  @JsonKey(name: "Quantity")
+  late int qty;
+
   WishlistModel();
 
   factory WishlistModel.fromJson(Map<String, dynamic> json) =>
@@ -23,5 +26,6 @@ class WishlistModel {
     id = mp['Wishid'];
     name = mp['Medname'];
     type = mp['Type'];
+    qty = mp['Quantity'];
   }
 }

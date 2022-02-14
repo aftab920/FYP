@@ -22,7 +22,7 @@ class _CollectedMedicinesState extends State<CollectedMedicines> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('All Donation Requests'),
+        title: Text('Collected Medicines'),
       ),
       body: Obx(
         () => ListView.builder(
@@ -31,7 +31,6 @@ class _CollectedMedicinesState extends State<CollectedMedicines> {
 
             return Card(
               elevation: 5,
-              color: Colors.green,
               child: ListTile(
                 leading: Icon(Icons.medication),
                 title: Text(allCollected.medName),

@@ -29,16 +29,22 @@ class _WishlistState extends State<Wishlist> {
           itemBuilder: (context, index) {
             med = wishCtrl.wishlist[index];
             return Card(
-              color: Colors.green,
               elevation: 5,
               child: ListTile(
                 leading: Icon(Icons.medical_services),
                 title: Text(med.name),
-                subtitle: Text(med.type),
+                subtitle: Column(
+                  children: [
+                    Text(med.type),
+                    Text('Quantity: ${med.qty}'),
+                  ],
+                ),
                 trailing: ElevatedButton(
                   child: Text('Get Medicine'),
                   onPressed: () {
-                    Get.to(() => PharmaciesList());
+                    var wishid = wishCtrl.wishlist[index].id;
+                    print(wishCtrl.wishlist[index].id);
+                    Get.to(() => PharmaciesList(), arguments: [wishid]);
                   },
                 ),
               ),

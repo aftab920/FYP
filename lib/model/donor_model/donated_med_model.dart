@@ -13,6 +13,9 @@ class DonatedMedModel {
   @JsonKey(name: "Quantity")
   late int quantity;
 
+  @JsonKey(name: "Expiry")
+  late String expiry;
+
   DonatedMedModel();
 
   factory DonatedMedModel.fromJson(Map<String, dynamic> json) =>
@@ -23,5 +26,6 @@ class DonatedMedModel {
     id = mp['Donor_id'];
     name = mp['Medname'];
     quantity = mp['Quantity'];
+    expiry = mp['Expiry'];
   }
 }
