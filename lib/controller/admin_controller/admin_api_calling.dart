@@ -73,6 +73,8 @@ class AdminApiCalling {
 
       if (response.statusCode == 200) {
         globals.id = data[0];
+        globals.pswd = password;
+        globals.email = email;
 
         if (data[1] == 'donor' || data[1] == 'Donor')
           Get.to(() => MemberOverview());

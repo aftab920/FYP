@@ -11,7 +11,7 @@ MedicineAvailableModel _$MedicineAvailableModelFromJson(
     MedicineAvailableModel()
       ..id = json['Whstockid'] as int
       ..name = json['Medname'] as String
-      ..date = json['Medname'] as String
+      ..date = json['Expiry'] as String
       ..quantity = json['Quantity'] as int;
 
 Map<String, dynamic> _$MedicineAvailableModelToJson(

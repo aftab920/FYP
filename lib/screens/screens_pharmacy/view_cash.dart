@@ -39,28 +39,28 @@ class _ViewCashState extends State<ViewCash> {
                   ],
                 ),
               ),
-              Row(
-                children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.8,
-                    height: MediaQuery.of(context).size.height * 0.2,
-                    margin: EdgeInsets.only(
-                        left: (MediaQuery.of(context).size.width * 0.1),
-                        right: (MediaQuery.of(context).size.width * 0.1),
-                        bottom: (MediaQuery.of(context).size.width * 0.3)),
-                    padding:
-                        EdgeInsets.all(MediaQuery.of(context).size.width * 0.1),
-                    child: Text(
-                      'Donated Amount: ${snapshot.data[1]}',
-                      style:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.center,
-                      softWrap: true,
-                    ),
-                    color: Colors.cyan,
-                  ),
-                ],
-              )
+              // Row(
+              //   children: [
+              //     Container(
+              //       width: MediaQuery.of(context).size.width * 0.8,
+              //       height: MediaQuery.of(context).size.height * 0.2,
+              //       margin: EdgeInsets.only(
+              //           left: (MediaQuery.of(context).size.width * 0.1),
+              //           right: (MediaQuery.of(context).size.width * 0.1),
+              //           bottom: (MediaQuery.of(context).size.width * 0.3)),
+              //       padding:
+              //           EdgeInsets.all(MediaQuery.of(context).size.width * 0.1),
+              //       child: Text(
+              //         'Total Cash: ${snapshot.data[1]}',
+              //         style:
+              //             TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+              //         textAlign: TextAlign.center,
+              //         softWrap: true,
+              //       ),
+              //       color: Colors.cyan,
+              //     ),
+              //   ],
+              // )
             ],
           );
         },

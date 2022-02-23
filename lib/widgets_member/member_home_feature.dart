@@ -16,7 +16,17 @@ final memberHomeFeature = [
   ),
   Home(
     'a3',
-    'Financial Donation For Medicine',
+    'Financial Donation Receipts',
     Icon(Icons.post_add),
   ),
+  Home(
+    'a4',
+    'Cash Donations          ',
+    Icon(Icons.post_add),
+  ),
+  // Home(
+  //   'a5',
+  //   'Check',
+  //   Icon(Icons.post_add),
+  // ),
 ];

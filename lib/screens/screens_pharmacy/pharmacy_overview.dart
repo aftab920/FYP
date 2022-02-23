@@ -4,7 +4,9 @@ import 'package:fyp_real/controller/pharmacy_controller/pharmacy_api_calling.dar
 import 'package:fyp_real/controller/pharmacy_controller/pharmacy_cash_controller.dart';
 import 'package:fyp_real/screens/auth_screen.dart';
 import 'package:fyp_real/screens/main_functions_item.dart';
+import 'package:fyp_real/screens/screens_pharmacy/collected_cash.dart';
 import 'package:fyp_real/screens/screens_pharmacy/donation_requests_by_donor.dart';
+import 'package:fyp_real/screens/screens_pharmacy/funds_receipt.dart';
 import 'package:fyp_real/screens/screens_pharmacy/medicine_requests_by_admin.dart';
 import 'package:fyp_real/screens/screens_pharmacy/pharmacy_donated.dart';
 import 'package:fyp_real/screens/screens_pharmacy/pharmacy_profile_edit.dart';
@@ -23,11 +25,17 @@ class _PharmacyOverviewState extends State<PharmacyOverview> {
   // late int availableCash;
   // late PharmacyCashController cashCtrl;
 
-  @override
-  void initState() {
-    //   cashCtrl = Get.put(PharmacyCashController());
-    //PharmacyApiCalling().getCash();
-    super.initState();
+  void _donationReceiptDonor(BuildContext ctx) {
+    showModalBottomSheet(
+      context: ctx,
+      builder: (_) {
+        return GestureDetector(
+          onTap: () {},
+          child: FundsReceipt(),
+          behavior: HitTestBehavior.opaque,
+        );
+      },
+    );
   }
 
   @override
@@ -142,7 +150,7 @@ class _PharmacyOverviewState extends State<PharmacyOverview> {
                           });
                     }
                     if (overviewFunctions.id == 'a2') {
-                      Get.to(() => DonationRequestsByDonor());
+                      _donationReceiptDonor(context);
                     }
                     if (overviewFunctions.id == 'a3') {
                       Get.to(() => MedicineRequestsByAdmin());
@@ -152,6 +160,9 @@ class _PharmacyOverviewState extends State<PharmacyOverview> {
                     }
                     if (overviewFunctions.id == 'a5') {
                       Get.to(() => ViewCash());
+                    }
+                    if (overviewFunctions.id == 'a6') {
+                      Get.to(() => CollectedCash());
                     }
                   },
                   child: MainFunctionsItem(

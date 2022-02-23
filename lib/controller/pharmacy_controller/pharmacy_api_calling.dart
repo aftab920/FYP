@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:fyp_real/controller/pharmacy_controller/cash_controller.dart';
+import 'package:fyp_real/controller/pharmacy_controller/collected_cash_controller.dart';
 import 'package:fyp_real/controller/pharmacy_controller/donation_requests_controller.dart';
 import 'package:fyp_real/controller/pharmacy_controller/medicine_requests_controller.dart';
 import 'package:fyp_real/controller/pharmacy_controller/pharmacy_cash_controller.dart';
@@ -237,6 +238,64 @@ class PharmacyApiCalling {
       print(e);
       var data;
       return data;
+    }
+  }
+
+  Future generateReceipt(pharmId, amount, donorId, assisName) async {
+    try {
+      String uri = '${globals.baseUrl}/pharmacy/generateReceipt';
+
+      var response = await http1.post(
+        Uri.parse(uri),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: jsonEncode(
+          <String, String>{
+            "pharmacyId": pharmId.toString(),
+            "amount": amount.toString(),
+            "donorId": donorId.toString(),
+            "AssistantName": assisName.toString(),
+          },
+        ),
+      );
+
+      if (response.statusCode == 200) {
+        Get.snackbar("Successfull", "Report sent to Donor");
+        Get.to(() => PharmacyOverview());
+      } else if (response.statusCode == 404) {
+        Get.snackbar("Not Fount", "${response.body}");
+      } else if (response.statusCode == 409) {
+        Get.snackbar("Alert!", "${response.body}");
+      } else {
+        Get.snackbar("Error", "Unknown Error!");
+      }
+    } on Exception catch (e) {
+      print(e);
+      Get.snackbar('Failed', '$e');
+    }
+  }
+
+  Future collectedCash() async {
+    try {
+      String uri = '${globals.baseUrl}/pharmacy/collectedCash?id=${globals.id}';
+
+      var response = await http1.get(
+        Uri.parse(uri),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+      );
+      print(response.body);
+      if (response.statusCode == 200) {
+        print('Successfull');
+        Get.find<CollectedCashController>().allCollection(response);
+      } else {
+        print('Failed');
+        Get.to(PharmacyOverview());
+      }
+    } on Exception catch (e) {
+      print(e);
     }
   }
 }

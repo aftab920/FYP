@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fyp_real/model/home.dart';
 
@@ -10,7 +9,7 @@ final pharmacyHomeFeature = [
   ),
   Home(
     'a2',
-    'Donation Requests By Donor',
+    'Cash Donation Entry',
     Icon(Icons.inventory_outlined),
   ),
   Home(
@@ -28,4 +27,9 @@ final pharmacyHomeFeature = [
     'View Cash               ',
     Icon(Icons.inventory_outlined),
   ),
+  Home(
+    'a6',
+    'Collected Cash               ',
+    Icon(Icons.money),
+  )
 ];
